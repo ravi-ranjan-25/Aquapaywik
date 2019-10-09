@@ -2,8 +2,11 @@ argon2-cffi==19.1.0
 bcrypt==3.1.7
 certifi==2019.6.16
 cffi==1.12.3
+dj-database-url==0.5.0
 Django==2.2.1
+django-heroku==0.3.1
 Faker==2.0.1
+psycopg2==2.8.3
 pycparser==2.19
 python-dateutil==2.8.0
 pytz==2019.2
@@ -11,4 +14,3 @@ six==1.12.0
 sqlparse==0.3.0
 text-unidecode==1.2
 whitenoise==4.1.4
-gunicorn==19.9.0
