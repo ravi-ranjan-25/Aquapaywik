@@ -26,7 +26,7 @@ SECRET_KEY = 'g%u#0i)w4%2v0qm^sxi*18*!sdo3f3(1-21+gbc-$v&d9*#vp8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aquapaywik.heroku.com',]
 
 
 # Application definition
