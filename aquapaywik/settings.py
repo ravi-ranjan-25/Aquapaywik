@@ -23,7 +23,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = 'g%u#0i)w4%2v0qm^sxi*18*!sdo3f3(1-21+gbc-$v&d9*#vp8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
- # DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -73,20 +73,12 @@ WSGI_APPLICATION = 'aquapaywik.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}
-"""
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
 }
 
 # Password validation
