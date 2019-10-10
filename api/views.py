@@ -9,17 +9,59 @@ from django.http import JsonResponse
 
 """
 API CONFIGURATION
-api/hardware/userConsumption:
-    [meter_id],[quantity]
-api/hardware/areaRequest:
-    [areaid],[quantity]
-api/hardware/quality:
-    [quality]
 
-api/software/signup
-api/software/login
-api/software/water
-api/software/Complain
+----------------->API FOR HARDWARE <----------------
+
+-->api/hardware/userConsumption:
+FOR HOUSE LEVEL WATER CONSUMPTION
+https://aquapaywik.herokuapp.com/api/hardware/user?meter_id=12&quantity=21
+
+meter_id must be same as that of house_no during registration
+
+default = 12
+
+-->api/hardware/areaRequest:
+FOR AREA LEVEL WATER CONSUMPTION
+https://aquapaywik.herokuapp.com/api/hardware/area?areaid=AREA1&quantity=100
+use areaid = AREA1 OR AREA2
+
+-->api/hardware/quality:
+API FOR QUALITY   
+https://aquapaywik.herokuapp.com/api/hardware/quality?quality=10
+
+
+
+-------> SOFTWARE FOR USER <---------
+
+-->api/software/signup
+
+https://aquapaywik.herokuapp.com/api/software/signup?username=ranjanravi25&email=ravi25@gmail.com&password=1234&firstname=Ravi&lastname=Singh&street=164vip&houseno=10&pincode=12345
+
+Return type boolean {result:1} 1->success
+                               0->username already in use(email will be added in next update)
+---> api/software/login
+
+https://aquapaywik.herokuapp.com/api/software/slogin?username=ranjanravi25&password=1234
+
+Return type boolean {result:1} 1->success
+                               0->incorrect username or password(email will be added in next update)
+
+
+-->api/software/water(Returns Water Consumption)
+
+https://aquapaywik.herokuapp.com/api/software/waterconsumed?username=ranjanravi25
+
+Return type float {result:AMOUNT OF WATER CONSUMED} 
+
+
+-->api/software/Complain
+
+FILE WATER COMPLAIN
+
+https://aquapaywik.herokuapp.com/api/software/complain?username=ranjan&complain=qwertyuighbnbnhnhjm
+
+Return type boolean {result:1} 1->success
+                               
 
 
 """
@@ -106,7 +148,8 @@ def login(request):
     
     user = authenticate(username=userName, password=Password)
     if user is not None:
-            return JsonResponse({'result':1})
+
+            return JsonResponse({'result':1,'info':user})
     else:
         return JsonResponse({'result':0})
 

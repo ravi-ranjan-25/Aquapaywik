@@ -27,7 +27,7 @@ urlpatterns = [
     path('hardware/',views.index , name = "index"),
     
     path('software/signup',views.signup , name = "use"),
-    path('software/slogin',views.login , name = "log"),
+    path('software/login',views.login , name = "log"),
     path('software/waterconsumed',views.water , name = "water"),
     path('software/complain',views.complainss , name = "comp"),
 
