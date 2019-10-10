@@ -149,7 +149,7 @@ def login(request):
     user = authenticate(username=userName, password=Password)
     if user is not None:
 
-            return JsonResponse({'result':1,'info':user})
+            return JsonResponse({'result':1})
     else:
         return JsonResponse({'result':0})
 
