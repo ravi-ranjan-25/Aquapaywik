@@ -145,11 +145,14 @@ def signup(request):
 def login(request):
     userName = request.GET.get('username')
     Password = request.GET.get('password')
-    
-    user = authenticate(username=userName, password=Password)
-    if user is not None:
+     
 
-            return JsonResponse({'result':1})
+    user1 = authenticate(username=userName, password=Password)
+    if user1 is not None:
+            house = houseDetails.objects.get(user = user1)
+            
+            return JsonResponse({'result':1,'username':user1.username,'email':user1.email,'firstname':user1.first_name,
+                                'lastname':user1.last_name,'house_no':house.house_no,'street_name':house.street_name,'pincode':house.pincode})
     else:
         return JsonResponse({'result':0})
 
