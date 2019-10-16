@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class area(models.Model):
-    areaid = models.CharField(max_length=10,default="areaid")
+    areaid = models.CharField(max_length=10)
     areaName = models.CharField(max_length=256)
 
     def __str__(self):
-        return self.areaName
+        return self.areaid
 
 
 class houseDetails(models.Model):
@@ -19,7 +19,8 @@ class houseDetails(models.Model):
     street_name = models.CharField(max_length=256)
     pincode = models.IntegerField()
     time = models.DateTimeField(default = timezone.now())
-
+    
+    Area = models.ForeignKey(area, on_delete = models.CASCADE) 
 
     def __str__(self):
         return self.house_no
@@ -36,6 +37,7 @@ class quality(models.Model):
     quality = models.FloatField(default= 0.00)        
     time = models.DateTimeField(default = timezone.now())
 
+  
   
 class userConsumption(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)

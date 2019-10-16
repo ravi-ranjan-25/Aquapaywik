@@ -31,4 +31,7 @@ urlpatterns = [
     path('software/waterconsumed',views.water , name = "water"),
     path('software/complain',views.complainss , name = "comp"),
 
+
+    path('software/viewconsumption',views.viewConsumption , name = "comp2"),
+
 ]
