@@ -65,7 +65,14 @@ FILE WATER COMPLAIN
 https://aquapaywik.herokuapp.com/api/software/complain?username=ranjan&complain=qwertyuighbnbnhnhjm&complainid="Water Quality"
 
 Return type boolean {result:1} 1->success
-                               
+
+--> api/software/viewConsumption
+
+VIEW CONSUMPTION
+
+http://aquapaywik.herokuapp.com/api/software/viewconsumption?params="AREA1"
+                    params --> "all"/"AREA1"/"AREA2"
+
 """
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
@@ -187,9 +194,15 @@ def signup(request):
     check = User.objects.filter(username = userName)
     checkEmail = User.objects.filter(email = eMail)
     checkHouse = houseDetails.objects.filter(house_no=House_no)
-    if len(check) > 0 or len(checkEmail) > 0:
+    if len(check) > 0:
         
-            return JsonResponse({'result':0,'message':'Username or email already exist'})
+            return JsonResponse({'result':0,'message':'Username already exist'})
+    
+    elif len(checkEmail) > 0:
+
+            return JsonResponse({'result':0,'message':'Email address already exist'})
+
+
     elif len(checkHouse) > 0:
              return JsonResponse({'result':0,'message':'House already registered'})
     else:
@@ -270,6 +283,7 @@ def viewConsumption(request):
  
     # houseWise = User.objects.all().values('username')
     
+
 
 
 
