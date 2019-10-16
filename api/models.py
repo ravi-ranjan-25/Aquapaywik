@@ -46,7 +46,7 @@ class userConsumption(models.Model):
     time = models.DateTimeField(default = timezone.now())
 
 
-class Complain(models.Model):
+class viewComplains(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
     complain = models.CharField(max_length=256)
     time = models.DateTimeField(default = timezone.now())
