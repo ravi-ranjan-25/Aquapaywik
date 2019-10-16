@@ -43,11 +43,13 @@ Return type boolean {result:1} 1->success
                                0->username already in use(email will be added in next update)
 ---> api/software/login
 
-https://aquapaywik.herokuapp.com/api/software/slogin?username=ranjanravi25&password=1234
+https://aquapaywik.herokuapp.com/api/software/login?username=ranjanravi25&password=1234
 
-Return type boolean {result:1} 1->success
-                               0->incorrect username or password(email will be added in next update)
-
+Return type boolean {result:1,admin = 0/1}
+                            Result ==    1->success
+                                         0->incorrect username or password(email will be added in next update)
+                            Admin ==   1-> User is admin
+                                       0->User not a admin    
 
 -->api/software/water(Returns Water Consumption)
 
@@ -60,7 +62,7 @@ Return type float {result:AMOUNT OF WATER CONSUMED}
 
 FILE WATER COMPLAIN
 
-https://aquapaywik.herokuapp.com/api/software/complain?username=ranjan&complain=qwertyuighbnbnhnhjm
+https://aquapaywik.herokuapp.com/api/software/complain?username=ranjan&complain=qwertyuighbnbnhnhjm&complainid="Water Quality"
 
 Return type boolean {result:1} 1->success
                                
@@ -180,7 +182,7 @@ def signup(request):
     street = request.GET.get('street')
     Pincode = request.GET.get("pincode")
     aarea = request.GET.get("areaid")
-
+    
     
     check = User.objects.filter(username = userName)
     checkEmail = User.objects.filter(email = eMail)
@@ -207,11 +209,16 @@ def login(request):
     
 
     user1 = authenticate(username=userName, password=Password)
+
+
     if user1 is not None:
+            admin = 0 
             house = houseDetails.objects.get(user = user1)
-            
+            if(house.admin == 1):
+                admin = 1
+
             return JsonResponse({'result':1,'username':user1.username,'email':user1.email,'firstname':user1.first_name,
-                                'lastname':user1.last_name,'house_no':house.house_no,'street_name':house.street_name,'pincode':house.pincode})
+                                'lastname':user1.last_name,'house_no':house.house_no,'street_name':house.street_name,'pincode':house.pincode,'admin':admin})
     else:
         return JsonResponse({'result':0})
 
