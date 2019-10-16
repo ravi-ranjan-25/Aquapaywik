@@ -19,7 +19,7 @@ class houseDetails(models.Model):
     street_name = models.CharField(max_length=256)
     pincode = models.IntegerField()
     time = models.DateTimeField(default = timezone.now())
-    
+    admin = models.BooleanField(default = 0)
     Area = models.ForeignKey(area, on_delete = models.CASCADE) 
 
     def __str__(self):
@@ -49,6 +49,8 @@ class Complain(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
     complain = models.CharField(max_length=256)
     time = models.DateTimeField(default = timezone.now())
+    complainid = models.CharField(max_length=256) 
+    status = models.BooleanField(default=0)
 
     def __str__(self):
         return self.complain     

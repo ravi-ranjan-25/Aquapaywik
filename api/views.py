@@ -204,7 +204,7 @@ def signup(request):
 def login(request):
     userName = request.GET.get('username')
     Password = request.GET.get('password')
-     
+    
 
     user1 = authenticate(username=userName, password=Password)
     if user1 is not None:
@@ -231,10 +231,11 @@ def water(request):
 def complainss(request):
     userName = request.GET.get('username')
     complains = request.GET.get('complain')
+    complainid1 = request.GET.get('complainid')
 
     user1 = User.objects.get(username=userName)
 
-    comp = Complain(complain = complains)
+    comp = Complain(complain = complains,complainid = complainid1 )
     comp.user = user1
     comp.save()    
 
@@ -243,7 +244,7 @@ def complainss(request):
 
 
 def viewConsumption(request):
-    houseWise = userConsumption.objects.all()
+    houseWise = User.objects.all().values('username')
     SomeModel_json = serializers.serialize("json", houseWise)
     data = {"result": SomeModel_json}
     return JsonResponse(data)
