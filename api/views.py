@@ -187,10 +187,11 @@ def signup(request):
     check = User.objects.filter(username = userName)
     checkEmail = User.objects.filter(email = eMail)
     checkHouse = houseDetails.objects.filter(house_no=House_no)
-    if len(check) > 0 or len(checkEmail) > 0 or len(checkHouse) > 0 :
+    if len(check) > 0 or len(checkEmail) > 0:
         
             return JsonResponse({'result':0,'message':'Username or email already exist'})
-
+    elif len(checkHouse) > 0:
+             return JsonResponse({'result':0,'message':'House already registered'})
     else:
         print(street)
         user1 = User.objects.create_user(username = userName, email=eMail, password=Password, first_name = firstname , last_name = lastname)
@@ -200,7 +201,7 @@ def signup(request):
         house_add.save()
           
         # Return 1
-        return JsonResponse({'result':1})
+        return JsonResponse({'result':1,'message':'success'})
 
 
 def login(request):
@@ -251,16 +252,24 @@ def complainss(request):
 
 
 def viewConsumption(request):
-    houseWise = User.objects.all().values('username')
-    SomeModel_json = serializers.serialize("json", houseWise)
-    data = {"result": SomeModel_json}
-    return JsonResponse(data)
+    params = request.GET.get('params')
+    
+    if params == "all":
+        areaComplete = areaQuantity.objects.all()
+        return_json = serializers.serialize("json", areaComplete)
+        data = {"result": return_json}
+        return JsonResponse(data)
 
-def viewConsumptionArea(request):
-    houseWise = area.objects.all()
-    SomeModel_json = serializers.serialize("json", houseWise)
-    data = {"result": SomeModel_json}
-    return JsonResponse(data)
+
+    else:
+        
+        areaParam = userConsumption.objects.filter(area = params)
+        return_json = serializers.serialize("json", areaComplete)
+        data = {"result": return_json}
+        return JsonResponse(data)
+ 
+    # houseWise = User.objects.all().values('username')
+    
 
 
 

@@ -41,6 +41,7 @@ class quality(models.Model):
   
 class userConsumption(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
+    areaid = models.CharField(max_length=256,default="AREA1")
     consumption = models.FloatField(default=0.00)
     time = models.DateTimeField(default = timezone.now())
 
