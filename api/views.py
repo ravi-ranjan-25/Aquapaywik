@@ -263,8 +263,8 @@ def viewConsumption(request):
 
     else:
         
-        areaParam = userConsumption.objects.filter(area = params)
-        return_json = serializers.serialize("json", areaComplete)
+        areaParam = userConsumption.objects.filter(areaid = params)
+        return_json = serializers.serialize("json", areaParam)
         data = {"result": return_json}
         return JsonResponse(data)
  
