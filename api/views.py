@@ -45,7 +45,7 @@ Return type boolean {result:1} 1->success
 
 https://aquapaywik.herokuapp.com/api/software/login?username=ranjanravi25&password=1234
 
-Return type boolean {result:1,admin = 0/1}
+Return type boolean {result:1,admin = 0/1,}
                             Result ==    1->success
                                          0->incorrect username or password(email will be added in next update)
                             Admin ==   1-> User is admin
@@ -186,8 +186,8 @@ def signup(request):
     
     check = User.objects.filter(username = userName)
     checkEmail = User.objects.filter(email = eMail)
-    
-    if len(check) > 0 or len(checkEmail) > 0:
+    checkHouse = houseDetails.objects.filter(house_no=House_no)
+    if len(check) > 0 or len(checkEmail) > 0 or len(checkHouse) > 0 :
         
             return JsonResponse({'result':0,'message':'Username or email already exist'})
 
