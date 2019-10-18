@@ -33,5 +33,5 @@ urlpatterns = [
 
 
     path('software/viewconsumption',views.viewConsumption , name = "comp2"),
-  
+    
 ]

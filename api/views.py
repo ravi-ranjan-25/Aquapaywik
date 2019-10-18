@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.http import JsonResponse
 from django.core import serializers
-
+import random
 # Create your views here.
 
 """
@@ -254,9 +254,15 @@ def complainss(request):
     complains = request.GET.get('complain')
     complainid1 = request.GET.get('complainid')
 
+
+
     user1 = User.objects.get(username=userName)
 
-    comp = Complain(complain = complains,complainid = complainid1 )
+    complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
+    
+    complaint = "COMP25"+str(complaint)
+    print(complaint)
+    comp = Complain(complain = complains,complainid = complainid1,complaintxn = complaint )
     comp.user = user1
     comp.save()    
 
@@ -283,10 +289,7 @@ def viewConsumption(request):
  
     # houseWise = User.objects.all().values('username')
     
-
-
-
-
+    
 
 
 

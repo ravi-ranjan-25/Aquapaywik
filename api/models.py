@@ -48,6 +48,7 @@ class userConsumption(models.Model):
 
 class Complain(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
+    complaintxn = models.CharField(max_length=256,default = "COMP123")
     complain = models.CharField(max_length=256)
     time = models.DateTimeField(default = timezone.now())
     complainid = models.CharField(max_length=256) 
