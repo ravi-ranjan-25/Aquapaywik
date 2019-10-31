@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from api.models import houseDetails,area,areaQuantity,quality,userConsumption,Complain
+from api.models import houseDetails,area,areaQuantity,quality,userConsumption,Complain,tax,wallet
 from api.forms import UserForm,areaForm,houseForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -130,9 +130,26 @@ def userConsumptionN(request):
     amount = request.GET.get('quantity')
     
     d = houseDetails.objects.get(house_no=house)
-   
+    e = wallet.objects.get(user=d.user)   
     c = userConsumption(user = d.user,consumption = amount)
+    
+    e.consumption = e.consumption + amount
+    consumed = e.consumption
+
+    price = 0
+    if(consumed <= 2):
+        price = consumed * 10
+    elif consumed >= 2 and consumed <= 5:
+        price = (2*10)+(consumed - 2*12)
+    else:        
+        price = (2*10)+(3*12)+(consumed-5)*15
+
+    e.amount = price
+
+    e.save()
     c.save()
+
+
     return JsonResponse({'result':1})
     
 

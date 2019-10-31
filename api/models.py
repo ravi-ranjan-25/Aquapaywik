@@ -65,3 +65,12 @@ class Tax(models.Model):
     def __str__(self):
         return self.txnid
 
+class wallet(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    amount = models.FloatField(max_length=10,default = 0.00)
+    consumption = models.FloatField(default=0.00)
+    
+
+    def __str__(self):
+        return self.user
+
