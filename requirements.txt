@@ -5,7 +5,10 @@ cffi==1.12.3
 dj-database-url==0.5.0
 Django==2.2.1
 django-heroku==0.3.1
+djangorestframework==3.10.3
 Faker==2.0.1
+gunicorn==19.9.0
+Markdown==3.1.1
 psycopg2==2.8.3
 pycparser==2.19
 python-dateutil==2.8.0
@@ -14,5 +17,3 @@ six==1.12.0
 sqlparse==0.3.0
 text-unidecode==1.2
 whitenoise==4.1.4
-gunicorn==19.9.0
-djangorestframework==3.10.3

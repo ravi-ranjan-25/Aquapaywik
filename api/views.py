@@ -7,6 +7,8 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.core import serializers
 import random
+from .serializers import userSerializer
+from rest_framework.generics import ListAPIView
 # Create your views here.
 
 """
@@ -270,6 +272,8 @@ def login(request):
             admin = 0 
             house = houseDetails.objects.get(user = user1)
             if(house.admin == 1):
+                consumed = userConsumption.objects.filter(time__gte=timezone.now().replace(day=1, hour=0, minute=0, second=0, microsecond=0),user=user1)
+
                 admin = 1
 
             return JsonResponse({'result':1,'username':user1.username,'email':user1.email,'firstname':user1.first_name,
@@ -347,11 +351,11 @@ def showQuality(request):
         data = {"result": return_json}
         return JsonResponse(data)
 
-def showUser(request):
-        complains = User.objects.all()
-        return_json = serializers.serialize("json", complains)
-        data = {"result": return_json}
-        return JsonResponse(data)
+#def showUser(request):
+    
+            # return_json = serializers.serialize("json", complains)
+            # data = {"result": return_json}
+            # return JsonResponse(data)
 
 def paytmCall(request):
         username1 = request.object.post('username')
@@ -367,4 +371,6 @@ def paytmCall(request):
         transaction.user = user1
         transaction.save()
 
-        
+class UserListView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = userSerializer

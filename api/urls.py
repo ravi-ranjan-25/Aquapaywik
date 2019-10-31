@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from api import views
+from rest_framework import routers
+from .views import UserListView
 
+# router = routers.DefaultRouter()
+# router.register('users',views.UserListView , base_name="User")
 
 urlpatterns = [
     path('hardware/user',views.userConsumptionN , name = "userConsumptionN"),
@@ -30,13 +34,14 @@ urlpatterns = [
     path('software/login',views.login , name = "log"),
     path('software/waterconsumed',views.water , name = "water"),
     path('software/complain',views.complainss , name = "comp"),
-
+#   path('/show',include(router.urls)),
 
     path('software/viewconsumption',views.viewConsumption , name = "comp2"),
     path('software/showcomplains',views.showComplains,name = "complain"),
     path('software/showquality',views.showQuality,name = "quality"),
-    path('software/showuser',views.showUser,name = "use"),
+    path('software/showuser',UserListView.as_view(),name = "use"),
     path('software/paytmcall',views.paytmCall,name = "paytmcall"),
+
 
 
 ]
