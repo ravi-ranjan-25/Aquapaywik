@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from api.models import houseDetails,area,areaQuantity,quality,userConsumption,Complain,tax,wallet
+from api.models import houseDetails,area,areaQuantity,quality,userConsumption,Complain,Tax,wallet
 from api.forms import UserForm,areaForm,houseForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
