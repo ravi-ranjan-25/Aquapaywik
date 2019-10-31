@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from api.models import Complain
 
 class userSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,6 +9,6 @@ class userSerializer(serializers.ModelSerializer):
 
 class complainSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['pk','username','first_name','last_name','email']
+        model = Complain
+        fields = '__all__'
                 

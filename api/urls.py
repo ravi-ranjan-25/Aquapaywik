@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from api import views
 from rest_framework import routers
-from .views import UserListView
+from .views import UserListView,complainListView
 
 # router = routers.DefaultRouter()
 # router.register('users',views.UserListView , base_name="User")
@@ -38,7 +38,7 @@ urlpatterns = [
 #   path('/show',include(router.urls)),
 
     path('software/viewconsumption',views.viewConsumption , name = "comp2"),
-    path('software/showcomplains',views.showComplains,name = "complain"),
+    path('software/showcomplains',complainListView.as_view(),name = "complain"),
     path('software/showquality',views.showQuality,name = "quality"),
     path('software/showuser',UserListView.as_view(),name = "use"),
     path('software/paytmcall',views.paytmCall,name = "paytmcall"),

@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.core import serializers
 import random
-from .serializers import userSerializer
+from .serializers import userSerializer, complainSerializer
 from rest_framework.generics import ListAPIView
 # Create your views here.
 
@@ -374,6 +374,11 @@ def paytmCall(request):
 class UserListView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = userSerializer
+
+class complainListView(ListAPIView):
+    queryset = Complain.objects.all()
+    serializer_class = complainSerializer
+
 
 def modelapi(request):
     return JsonResponse({'result': 2})
