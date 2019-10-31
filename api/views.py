@@ -91,6 +91,12 @@ http://aquapaywik.herokuapp.com/api/software/showcomplains
 
 Return  {result:"  "}
 
+--> api/software/paytmcall
+http://aquapaywik.herokuapp.com/api/software/paytmcall
+
+
+
+
 """
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------

@@ -36,6 +36,7 @@ urlpatterns = [
     path('software/showcomplains',views.showComplains,name = "complain"),
     path('software/showquality',views.showQuality,name = "quality"),
     path('software/showuser',views.showUser,name = "use"),
+    path('software/paytmcall',views.paytmCall,name = "paytmcall"),
 
 
 ]
