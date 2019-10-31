@@ -161,7 +161,11 @@ def areaRequest(request):
     
     d = area.objects.get(areaid=area_id)
     c = areaQuantity(areaN = d,quantity = quantityWater)
+    
     c.save()
+    
+
+
     return JsonResponse({'result':1})
 
 
@@ -358,8 +362,8 @@ def showQuality(request):
             # return JsonResponse(data)
 
 def paytmCall(request):
-        username1 = request.object.post('username')
-        am = request.object.post('TXN_AMOUNT')
+        username1 = request.object.get('username')
+        am = request.object.get('TXN_AMOUNT')
 
         user1 = User.objects.get(username = username1)
 

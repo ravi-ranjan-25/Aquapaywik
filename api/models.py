@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 class area(models.Model):
     areaid = models.CharField(max_length=10)
     areaName = models.CharField(max_length=256)
+    areastatus = models.IntegerField(max_length=3,default=0)
+    consumed = models.FloatField(default=0.00)
 
     def __str__(self):
         return self.areaid
@@ -61,6 +63,7 @@ class Tax(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
     txnid = models.CharField(max_length = 256)
     amount = models.FloatField(max_length=10)
+    time = models.DateTimeField(default = timezone.now())
 
     def __str__(self):
         return self.txnid
