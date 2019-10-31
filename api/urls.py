@@ -26,6 +26,7 @@ urlpatterns = [
     path('hardware/user',views.userConsumptionN , name = "userConsumptionN"),
     path('hardware/area',views.areaRequest , name = "areaRequest"),
     path('hardware/quality',views.qualityN , name = "qualityN"),
+    path('hardware/model',views.modelapi , name = "model"),
 
 
     path('hardware/',views.index , name = "index"),

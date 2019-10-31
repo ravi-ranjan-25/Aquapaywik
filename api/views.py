@@ -374,3 +374,6 @@ def paytmCall(request):
 class UserListView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = userSerializer
+
+def modelapi(request):
+    return JsonResponse({'result': 2})
