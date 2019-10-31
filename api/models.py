@@ -56,4 +56,12 @@ class Complain(models.Model):
 
     def __str__(self):
         return self.complain     
-   
+
+class Tax(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    txnid = models.CharField(max_length = 256)
+    amount = models.FloatField(max_length=10)
+
+    def __str__(self):
+        return self.txnid
+

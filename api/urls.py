@@ -33,5 +33,9 @@ urlpatterns = [
 
 
     path('software/viewconsumption',views.viewConsumption , name = "comp2"),
-    
+    path('software/showcomplains',views.showComplains,name = "complain"),
+    path('software/showquality',views.showQuality,name = "quality"),
+    path('software/showuser',views.showUser,name = "use"),
+
+
 ]

@@ -73,6 +73,24 @@ VIEW CONSUMPTION
 http://aquapaywik.herokuapp.com/api/software/viewconsumption?params="AREA1"
                     params --> "all"/"AREA1"/"AREA2"
 
+
+--> api/software/showuser
+http://aquapaywik.herokuapp.com/api/software/showuser
+
+Return  {result:"user details"} 
+
+
+--> api/software/showquality
+http://aquapaywik.herokuapp.com/api/software/showquality
+
+Return  {result:"  "} 
+
+
+--> api/software/showcomplains
+http://aquapaywik.herokuapp.com/api/software/showcomplains
+
+Return  {result:"  "}
+
 """
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
@@ -261,6 +279,8 @@ def complainss(request):
     complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
     
     complaint = "COMP25"+str(complaint)
+
+
     print(complaint)
     comp = Complain(complain = complains,complainid = complainid1,complaintxn = complaint )
     comp.user = user1
@@ -292,8 +312,31 @@ def viewConsumption(request):
     
 
 
+def showComplains(request):
+        complains = Complain.objects.all()
+        return_json = serializers.serialize("json", complains)
+        data = {"result": return_json}
+        return JsonResponse(data)
+ 
+def showQuality(request):
+        complains = quality.objects.all()
+        return_json = serializers.serialize("json", complains)
+        data = {"result": return_json}
+        return JsonResponse(data)
 
+def showUser(request):
+        complains = User.objects.all()
+        return_json = serializers.serialize("json", complains)
+        data = {"result": return_json}
+        return JsonResponse(data)
 
+def paytmCall(request):
+        username1 = request.object.post('username')
 
+        user1 = User.objects.get(username = username1)
 
+        complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
+    
+        txn = "TXN25"+str(complaint)
 
+        
