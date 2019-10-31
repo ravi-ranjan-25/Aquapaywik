@@ -332,11 +332,16 @@ def showUser(request):
 
 def paytmCall(request):
         username1 = request.object.post('username')
+        am = request.object.post('TXN_AMOUNT')
 
         user1 = User.objects.get(username = username1)
 
         complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
     
         txn = "TXN25"+str(complaint)
+
+        transaction = tax(amount = am, txnid = txn)
+        transaction.user = user1
+        transaction.save()
 
         
