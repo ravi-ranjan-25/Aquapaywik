@@ -359,8 +359,8 @@ def paytmCall(request):
         complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
     
         txn = "TXN25"+str(complaint)
-
-        transaction = tax(amount = am, txnid = txn)
+        
+        transaction = tax(amount = am, txnid = txn,username=username1)
         transaction.user = user1
         transaction.save()
 
