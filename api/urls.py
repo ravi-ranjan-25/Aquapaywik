@@ -44,6 +44,10 @@ urlpatterns = [
     path('software/paytmcall',views.paytmCall,name = "paytmcall"),
     path('software/transaction',transactionListView.as_view(),name = "transaction"),
 
+    path('software/estimated',views.estimated,name = "estimated"),
+
+
+
 
 
 ]

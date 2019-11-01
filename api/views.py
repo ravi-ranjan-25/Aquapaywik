@@ -9,6 +9,8 @@ from django.core import serializers
 import random
 from .serializers import userSerializer,complainSerializer,transactionSerializer,qualitySerializer
 from rest_framework.generics import ListAPIView
+import datetime
+import pytz
 # Create your views here.
 
 """
@@ -314,7 +316,6 @@ def complainss(request):
     
     complaint = "COMP25"+str(complaint)
 
-
     print(complaint)
     comp = Complain(complain = complains,complainid = complainid1,complaintxn = complaint )
     comp.user = user1
@@ -388,3 +389,42 @@ class qualityListView(ListAPIView):
 
 def modelapi(request):
     return JsonResponse({'result': 2})
+
+def estimated(request):
+    consumed = userConsumption.objects.all()
+    # print(consumed.time)
+
+    day1 = datetime.datetime.now(tz = pytz.UTC)
+    today = day1.replace(hour=0, minute=0, second=0, microsecond=0)
+    
+    tdelta = datetime.timedelta(days = 7)
+    tdelta1 = datetime.timedelta(days = 1)
+
+    month = day1.replace(day=1,hour=0, minute=0, second=0, microsecond=0)
+    seven = (day1 - tdelta)
+    yesterday = (day1 - tdelta1)
+
+    
+    todayConsumed = monthConsumed = sevenConsumed = yesterdayConsumed = 0
+
+    for c in consumed:
+        if(today<c.time):
+            todayConsumed = todayConsumed + c.consumption;
+            
+
+        if(c.time>month):
+            monthConsumed = monthConsumed + c.consumption;
+
+        if(c.time>seven):
+            sevenConsumed = sevenConsumed + c.consumption;
+
+        if c.time>yesterday and c.time<today:
+            yesterdayConsumed = yesterdayConsumed + c.consumption;
+        
+       
+    return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed})
+    
+        
+        
+    #tdelta = today - consumed.time 
+    
