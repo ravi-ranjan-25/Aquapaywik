@@ -75,6 +75,5 @@ class wallet(models.Model):
     amount = models.FloatField(max_length=10,default = 0.00)
     consumption = models.FloatField(default=0.00)
 
-    def __str__(self):
-        return self.user
+    
 

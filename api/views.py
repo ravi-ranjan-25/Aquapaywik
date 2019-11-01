@@ -360,13 +360,18 @@ def paytmCall(request):
         am = request.GET.get('TXN_AMOUNT')
 
         user1 = User.objects.get(username = username1)
+        user2 = User.objects.get(username = 'admin')
+        
         print(user1)
         complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
     
         txn = "TXN25"+str(complaint)
+        wall = wallet.objects.filter(user=user2)
         
         transaction = Tax(amount = am, txnid = txn,username=username1)
         transaction.user = user1
+        wall.amount = wall.amount + am
+        wall.save()
         transaction.save()
         return JsonResponse({'result':1})
 
@@ -435,4 +440,14 @@ def estimated(request):
         
         
     #tdelta = today - consumed.time 
+
+def pendingTax(request):
+    am = wallet.objects.all()
+    for a in am:
+        total = a.amount + total
+    
+    
+    total = total - wall.amount
+
+    return JsonResponse({'pending':total,'collected':wall.amount})
     
