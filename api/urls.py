@@ -23,6 +23,7 @@ from .views import UserListView,complainListView,transactionListView,qualityList
 # router.register('users',views.UserListView , base_name="User")
 
 urlpatterns = [
+   
     path('hardware/user',views.userConsumptionN , name = "userConsumptionN"),
     path('hardware/area',views.areaRequest , name = "areaRequest"),
     path('hardware/quality',views.qualityN , name = "qualityN"),
@@ -43,11 +44,8 @@ urlpatterns = [
     path('software/showuser',UserListView.as_view(),name = "use"),
     path('software/paytmcall',views.paytmCall,name = "paytmcall"),
     path('software/transaction',transactionListView.as_view(),name = "transaction"),
-
     path('software/estimated',views.estimated,name = "estimated"),
-
-
-
+    path('software/pendingtax',views.pendingtax,name = "estimated"),
 
 
 ]
