@@ -457,3 +457,16 @@ def pendingTax(request):
     
    
     return JsonResponse({'pending':total})
+
+
+def pendinguser(request):
+    username1 = request.GET.get('username')
+    
+    user1 = User.objects.get(username=username1)
+    Wallet = wallet.objects.get(user = user1)
+    
+
+    return JsonResponse({'result': Wallet.amount})
+
+    
+    
