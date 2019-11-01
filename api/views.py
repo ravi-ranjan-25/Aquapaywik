@@ -351,16 +351,16 @@ def viewConsumption(request):
             # return JsonResponse(data)
 
 def paytmCall(request):
-        username1 = request.object.get('username')
-        am = request.object.get('TXN_AMOUNT')
+        username1 = request.GET.get('username')
+        am = request.GET.get('TXN_AMOUNT')
 
         user1 = User.objects.get(username = username1)
-
+        print(user1)
         complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
     
         txn = "TXN25"+str(complaint)
         
-        transaction = tax(amount = am, txnid = txn,username=username1)
+        transaction = Tax(amount = am, txnid = txn,username=username1)
         transaction.user = user1
         transaction.save()
         return JsonResponse({'result':1})
