@@ -130,12 +130,13 @@ http://aquapaywik.herokuapp.com/api/software/paytmcall
 
 def userConsumptionN(request):
     house = request.GET.get('meter_id')
+    areaN = request.GET.get('areaid')
     
     amount = request.GET.get('quantity')
     
     d = houseDetails.objects.get(house_no=house)
     e = wallet.objects.get(user=d.user)   
-    c = userConsumption(user = d.user,consumption = amount)
+    c = userConsumption(user = d.user,consumption = amount,areaid=areaN)
     
     e.consumption = e.consumption + float(amount)
     consumed = e.consumption
@@ -391,8 +392,15 @@ def modelapi(request):
     return JsonResponse({'result': 2})
 
 def estimated(request):
-    consumed = userConsumption.objects.all()
     # print(consumed.time)
+    param = request.GET.get('area')
+    
+    if(param == "all"):
+        consumed = userConsumption.objects.all()
+    else:
+        consumed = userConsumption.objects.filter(areaid=param)
+        
+    
 
     day1 = datetime.datetime.now(tz = pytz.UTC)
     today = day1.replace(hour=0, minute=0, second=0, microsecond=0)
