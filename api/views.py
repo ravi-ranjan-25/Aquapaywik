@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.core import serializers
 import random
-from .serializers import userSerializer,complainSerializer,transactionSerializer
+from .serializers import userSerializer,complainSerializer,transactionSerializer,qualitySerializer
 from rest_framework.generics import ListAPIView
 # Create your views here.
 
@@ -343,17 +343,6 @@ def viewConsumption(request):
     
 
 
-def showComplains(request):
-        complains = Complain.objects.all()
-        return_json = serializers.serialize("json", complains)
-        data = {"result": return_json}
-        return JsonResponse(data)
- 
-def showQuality(request):
-        complains = quality.objects.all()
-        return_json = serializers.serialize("json", complains)
-        data = {"result": return_json}
-        return JsonResponse(data)
 
 #def showUser(request):
     
@@ -386,6 +375,10 @@ class complainListView(ListAPIView):
 class transactionListView(ListAPIView):
     queryset = Tax.objects.all()
     serializer_class = transactionSerializer
+
+class qualityListView(ListAPIView):
+    queryset = quality.objects.all()
+    serializer_class = qualitySerializer
 
 
 def modelapi(request):
