@@ -443,6 +443,7 @@ def estimated(request):
 
 def pendingTax(request):
     am = wallet.objects.all()
+    total = 0
     for a in am:
         total = a.amount + total
     
@@ -450,4 +451,3 @@ def pendingTax(request):
     total = total - wall.amount
 
     return JsonResponse({'pending':total,'collected':wall.amount})
-    
