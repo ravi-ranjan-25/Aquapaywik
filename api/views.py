@@ -135,7 +135,7 @@ def userConsumptionN(request):
     e = wallet.objects.get(user=d.user)   
     c = userConsumption(user = d.user,consumption = amount)
     
-    e.consumption = e.consumption + amount
+    e.consumption = e.consumption + float(amount)
     consumed = e.consumption
 
     price = 0
@@ -152,7 +152,7 @@ def userConsumptionN(request):
     c.save()
 
 
-    return JsonResponse({'result':1})
+    return JsonResponse({'result':1,'amount':e.amount})
     
 
 def areaRequest(request):
@@ -241,6 +241,7 @@ def signup(request):
     check = User.objects.filter(username = userName)
     checkEmail = User.objects.filter(email = eMail)
     checkHouse = houseDetails.objects.filter(house_no=House_no)
+   
     if len(check) > 0:
         
             return JsonResponse({'result':0,'message':'Username already exist'})
@@ -257,9 +258,11 @@ def signup(request):
         user1 = User.objects.create_user(username = userName, email=eMail, password=Password, first_name = firstname , last_name = lastname)
         area1 = area.objects.get(areaid=aarea)
         house_add = houseDetails(house_no = House_no,street_name =street,pincode =Pincode,Area=area1)
+        Wallet = wallet()
+        Wallet.user = user1
         house_add.user = user1
         house_add.save()
-          
+        Wallet.save()          
         # Return 1
         return JsonResponse({'result':1,'message':'success'})
 
