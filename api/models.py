@@ -55,6 +55,7 @@ class Complain(models.Model):
     time = models.DateTimeField(default = timezone.now())
     complainid = models.CharField(max_length=256) 
     status = models.BooleanField(default=0)
+    username = models.CharField(max_length=256,default="USER1")
 
     def __str__(self):
         return self.complain     

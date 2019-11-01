@@ -363,6 +363,8 @@ def paytmCall(request):
         transaction = tax(amount = am, txnid = txn,username=username1)
         transaction.user = user1
         transaction.save()
+        return JsonResponse({'result':1})
+
 
 class UserListView(ListAPIView):
     queryset = User.objects.all()
