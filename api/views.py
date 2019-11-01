@@ -399,12 +399,15 @@ def modelapi(request):
 def estimated(request):
     # print(consumed.time)
     param = request.GET.get('area')
+    username1 = request.GET.get('username')
     
-    if(param == "all"):
-        consumed = userConsumption.objects.all()
+    if(username1 == 'none'):
+        if(param == "all"):
+            consumed = userConsumption.objects.all()
+        else:
+            consumed = userConsumption.objects.filter(areaid=param)
     else:
-        consumed = userConsumption.objects.filter(areaid=param)
-        
+            consumed = userConsumption.objects.filter(user__username = username1)
     
 
     day1 = datetime.datetime.now(tz = pytz.UTC)
@@ -442,12 +445,15 @@ def estimated(request):
     #tdelta = today - consumed.time 
 
 def pendingTax(request):
+    user1 = User.objects.filter(username = 'admin')
+    
+    
     am = wallet.objects.all()
     total = 0
     for a in am:
-        total = a.amount + total
+        if(a.user != user1):
+            total = a.amount + total
     
     
-    total = total - wall.amount
-
-    return JsonResponse({'pending':total,'collected':wall.amount})
+   
+    return JsonResponse({'pending':total})
