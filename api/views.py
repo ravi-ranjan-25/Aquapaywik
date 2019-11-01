@@ -366,11 +366,11 @@ def paytmCall(request):
         complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
     
         txn = "TXN25"+str(complaint)
-        wall = wallet.objects.filter(user=user2)
+        wall = wallet.objects.get(user=user2)
         
         transaction = Tax(amount = am, txnid = txn,username=username1)
         transaction.user = user1
-        wall.amount = wall.amount + am
+        wall.amount = wall.amount + float(am)
         wall.save()
         transaction.save()
         return JsonResponse({'result':1})
