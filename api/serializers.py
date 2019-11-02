@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from api.models import Complain,Tax,quality,userConsumption
+from api.models import Complain,Tax,quality,userConsumption,wallet
 
 class userSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,7 +22,17 @@ class qualitySerializer(serializers.ModelSerializer):
         model = quality
         fields = '__all__'
 
+class walletSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField('Wallet')
+    
+    class Meta:
+        model = wallet
+        fields = '__all__'
 
+    def Wallet(self,wall): 
+         user1 = wall.user.username
+         print(user1)
+         return user1
 
 class homepageSerializer(serializers.ModelSerializer):
     my_field = serializers.SerializerMethodField('tax')

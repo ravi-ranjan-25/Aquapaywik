@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.core import serializers
 import random
-from .serializers import userSerializer,complainSerializer,transactionSerializer,qualitySerializer,homepageSerializer
+from .serializers import userSerializer,complainSerializer,transactionSerializer,qualitySerializer,homepageSerializer,walletSerializer
 from rest_framework.generics import ListAPIView
 import datetime
 import pytz
@@ -395,6 +395,10 @@ class qualityListView(ListAPIView):
 class homepageListView(ListAPIView):
     queryset = Tax.objects.all()
     serializer_class = homepageSerializer
+
+class walletListView(ListAPIView):
+    queryset = Tax.objects.all()
+    serializer_class = walletSerializer
 
 
 def modelapi(request):
