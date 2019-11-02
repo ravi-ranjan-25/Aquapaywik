@@ -49,7 +49,7 @@ urlpatterns = [
     path('software/pendinguser',views.pendinguser,name = "estimated3"),
     path('software/homepage',homepageListView.as_view(),name = "homese"),
     
-    path('software/pending',walletListView.as_view(),name = "homese"),
+    path('software/pending',walletListView.as_view(),name = "homes2e"),
 
 
 ]

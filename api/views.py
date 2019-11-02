@@ -397,7 +397,7 @@ class homepageListView(ListAPIView):
     serializer_class = homepageSerializer
 
 class walletListView(ListAPIView):
-    queryset = Tax.objects.all()
+    queryset = wallet.objects.all()
     serializer_class = walletSerializer
 
 
