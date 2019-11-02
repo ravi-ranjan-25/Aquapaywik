@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.core import serializers
 import random
-from .serializers import userSerializer,complainSerializer,transactionSerializer,qualitySerializer
+from .serializers import userSerializer,complainSerializer,transactionSerializer,qualitySerializer,homepageSerializer
 from rest_framework.generics import ListAPIView
 import datetime
 import pytz
@@ -392,6 +392,10 @@ class qualityListView(ListAPIView):
     queryset = quality.objects.all()
     serializer_class = qualitySerializer
 
+class homepageListView(ListAPIView):
+    queryset = Tax.objects.all()
+    serializer_class = homepageSerializer
+
 
 def modelapi(request):
     return JsonResponse({'result': 2})
@@ -400,13 +404,25 @@ def estimated(request):
     # print(consumed.time)
     param = request.GET.get('area')
     username1 = request.GET.get('username')
-    
+    total = 0
+    walle = 0
     if(username1 == 'none'):
+        am = wallet.objects.all()
+        user1 = User.objects.filter(username = 'admin')
+        
+        for a in am:
+            if(a.user != user1):
+                total = a.amount + total
+
         if(param == "all"):
             consumed = userConsumption.objects.all()
         else:
             consumed = userConsumption.objects.filter(areaid=param)
     else:
+            user1 = User.objects.get(username=username1)
+          
+            Wallet = wallet.objects.get(user = user1)
+            walle = Wallet.amount
             consumed = userConsumption.objects.filter(user__username = username1)
     
 
@@ -438,7 +454,7 @@ def estimated(request):
             yesterdayConsumed = yesterdayConsumed + c.consumption;
         
        
-    return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed})
+    return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,'userPending':walle,'area1':1,'area2':2})
     
         
         
