@@ -8,9 +8,16 @@ class userSerializer(serializers.ModelSerializer):
         fields = ['pk','username','first_name','last_name','email']
 
 class complainSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField('Complain')
+    
     class Meta:
         model = Complain
         fields = '__all__'
+
+    def Complain(self,wall): 
+         user1 = wall.user.username
+         return user1
+
 
 class transactionSerializer(serializers.ModelSerializer):
     class Meta:
