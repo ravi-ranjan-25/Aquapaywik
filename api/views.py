@@ -496,11 +496,19 @@ def viewprofile(request):
     username1 = request.GET.get('username')
     
     user1 = User.objects.get(username=username1)
-    Wallet = wallet.objects.get(user__username = username1)
-    house = houseDetails.objects.get(user__username = username1)
-
+    Wallet = wallet.objects.get(user = user1)
+    house = houseDetails.objects.get(user = user1)
+    area1 = house.Area
     return JsonResponse({'result':1,'username':user1.username,'email':user1.email,'firstname':user1.first_name,
-                        'lastname':user1.last_name,'house_no':house.house_no,'street_name':house.street_name,'pincode':house.pincode,'area':house.Area,'water_consumed':Wallet.consumption,'pending_tax':Wallet.amount})
+                        'lastname':user1.last_name,'house_no':house.house_no,'street_name':house.street_name,'pincode':house.pincode,'area':area1.areaName,'water_consumed':Wallet.consumption,'pending_tax':Wallet.amount})
   
+def resolveComplain(request):
+    get_id = request.GET.get('id')
+
+    comp = Complain.objects.get(pk=get_id)
+    comp.status = True
+
+    comp.save()
+    return JsonResponse({'result':1})  
     
     
