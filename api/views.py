@@ -492,5 +492,15 @@ def pendinguser(request):
 
     return JsonResponse({'result': Wallet.amount})
 
+def viewprofile(request):
+    username1 = request.GET.get('username')
+    
+    user1 = User.objects.get(username=username1)
+    Wallet = wallet.objects.get(user__username = username1)
+    house = houseDetails.objects.get(user__username = username1)
+
+    return JsonResponse({'result':1,'username':user1.username,'email':user1.email,'firstname':user1.first_name,
+                        'lastname':user1.last_name,'house_no':house.house_no,'street_name':house.street_name,'pincode':house.pincode,'area':house.Area,'water_consumed':Wallet.consumption,'pending_tax':Wallet.amount})
+  
     
     
