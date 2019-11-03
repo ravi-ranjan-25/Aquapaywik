@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from api.models import Complain,Tax,quality,userConsumption,wallet
+from api.models import Complain,Tax,quality,userConsumption,wallet,areaQuantity
 
 class userSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,6 +23,12 @@ class transactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tax
         fields = '__all__'
+
+class areaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = areaQuantity
+        fields = '__all__'
+
 
 class qualitySerializer(serializers.ModelSerializer):
     class Meta:
