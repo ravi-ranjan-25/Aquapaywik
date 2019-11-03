@@ -130,14 +130,19 @@ http://aquapaywik.herokuapp.com/api/software/paytmcall
 
 def userConsumptionN(request):
     house = request.GET.get('meter_id')
-    areaN = request.GET.get('areaid')
     
     amount = request.GET.get('quantity')
     
     d = houseDetails.objects.get(house_no=house)
-    e = wallet.objects.get(user=d.user)   
-    c = userConsumption(user = d.user,consumption = amount,areaid=areaN)
+    ar = d.Area
     
+    Areaid = ar.areaid
+    User1 = d.user
+    e = wallet.objects.get(user=User1)   
+    c = userConsumption(user = d.user,consumption = amount,areaid=Areaid)
+    a = area.objects.get(pk = ar.id)
+
+
     e.consumption = e.consumption + float(amount)
     consumed = e.consumption
 
@@ -149,8 +154,21 @@ def userConsumptionN(request):
     else:        
         price = (2*10)+(3*12)+(consumed-5)*15
 
-    e.amount = price
+    
+    Status = 0
 
+    if(consumed <= 20):
+        Status = 0
+    elif(consumed >=30 and consumed <= 40):
+        Status = 1
+    else:
+        Status = 2
+        
+    
+    e.amount = price
+    a.consumed = a.consumed + float(amount)
+    a.areastatus = Status
+    a.save()
     e.save()
     c.save()
 
@@ -173,9 +191,10 @@ def areaRequest(request):
 
 
 def qualityN(request):
-    qualityOfWater = request.GET.get('quality')
+    qualityOfWater = request.GET.get('voltage')
+    Ntu = request.GET.get('ntu')
     
-    d = quality(quality = qualityOfWater)
+    d = quality(quality = qualityOfWater,ntu = Ntu)
     d.save()
     return JsonResponse({'result':1})
 
@@ -461,8 +480,10 @@ def estimated(request):
         if c.time>yesterday and c.time<today:
             yesterdayConsumed = yesterdayConsumed + c.consumption;
         
-       
-    return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,'userPending':walle,'area1':1,'area2':2})
+    query = area.objects.all()[0]
+    query1 = area.objects.all()[1]
+   
+    return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus})
     
         
         
@@ -510,5 +531,15 @@ def resolveComplain(request):
 
     comp.save()
     return JsonResponse({'result':1})  
+
+def mapCall(request):
+    area1 = 'AREA1'
+    area2 = 'AREA2'
+    query = area.objects.all()[0]
+    query1 = area.objects.all()[1]
     
+
+    return JsonResponse({'AREA1':query.areastatus,'AREA2':query1.areastatus})  
+
+
     

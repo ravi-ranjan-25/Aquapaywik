@@ -1,0 +1,336 @@
+[
+    {
+      "model": "api.area",
+      "pk": 1,
+      "fields": {
+        "areaid": "AREA1",
+        "areaName": "SALT LAKE",
+        "areastatus": 0,
+        "consumed": 0
+      }
+    },
+    {
+      "model": "api.area",
+      "pk": 4,
+      "fields": {
+        "areaid": "AREA2",
+        "areaName": "NEWTOWN",
+        "areastatus": 0,
+        "consumed": 0
+      }
+    },
+    {
+      "model": "api.housedetails",
+      "pk": 1,
+      "fields": {
+        "user": 24,
+        "house_no": "10",
+        "street_name": "164vip",
+        "pincode": 12345,
+        "time": "2019-10-15T08:04:34Z",
+        "admin": true,
+        "Area": 3
+      }
+    },
+    {
+      "model": "api.housedetails",
+      "pk": 2,
+      "fields": {
+        "user": 26,
+        "house_no": "69",
+        "street_name": "164vip",
+        "pincode": 12345,
+        "time": "2019-11-01T05:13:34.301Z",
+        "admin": false,
+        "Area": 3
+      }
+    },
+    {
+      "model": "api.housedetails",
+      "pk": 3,
+      "fields": {
+        "user": 28,
+        "house_no": "14",
+        "street_name": "164vip",
+        "pincode": 12345,
+        "time": "2019-11-01T10:48:37Z",
+        "admin": true,
+        "Area": 3
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 1,
+      "fields": {
+        "user": 26,
+        "areaid": "0",
+        "consumption": 10,
+        "time": "2019-11-01T05:17:52.594Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 2,
+      "fields": {
+        "user": 26,
+        "areaid": "0",
+        "consumption": 10,
+        "time": "2019-11-01T09:56:03.325Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 3,
+      "fields": {
+        "user": 26,
+        "areaid": "0",
+        "consumption": 10,
+        "time": "2019-11-01T09:56:03.325Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 4,
+      "fields": {
+        "user": 26,
+        "areaid": "0",
+        "consumption": 10,
+        "time": "2019-11-01T09:56:03.325Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 5,
+      "fields": {
+        "user": 26,
+        "areaid": "0",
+        "consumption": 10,
+        "time": "2019-11-01T09:56:03.325Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 6,
+      "fields": {
+        "user": 26,
+        "areaid": "0",
+        "consumption": 10,
+        "time": "2019-11-01T09:56:03.325Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 7,
+      "fields": {
+        "user": 26,
+        "areaid": "0",
+        "consumption": 10,
+        "time": "2019-11-01T09:56:03.325Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 8,
+      "fields": {
+        "user": 26,
+        "areaid": "0",
+        "consumption": 10,
+        "time": "2019-11-01T09:56:03.325Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 9,
+      "fields": {
+        "user": 26,
+        "areaid": "AREA1",
+        "consumption": 10,
+        "time": "2019-11-01T10:28:08.913Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 10,
+      "fields": {
+        "user": 26,
+        "areaid": "AREA1",
+        "consumption": 10,
+        "time": "2019-11-01T10:28:08.913Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 11,
+      "fields": {
+        "user": 26,
+        "areaid": "AREA1",
+        "consumption": 10,
+        "time": "2019-11-01T10:28:08.913Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 12,
+      "fields": {
+        "user": 26,
+        "areaid": "AREA1",
+        "consumption": 10,
+        "time": "2019-11-01T10:28:08.913Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 13,
+      "fields": {
+        "user": 26,
+        "areaid": "AREA1",
+        "consumption": 10,
+        "time": "2019-11-03T10:51:43.700Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 14,
+      "fields": {
+        "user": 26,
+        "areaid": "AREA1",
+        "consumption": 10,
+        "time": "2019-11-03T10:52:09.587Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 15,
+      "fields": {
+        "user": 26,
+        "areaid": "AREA1",
+        "consumption": 10,
+        "time": "2019-11-03T10:55:04.622Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 16,
+      "fields": {
+        "user": 26,
+        "areaid": "AREA1",
+        "consumption": 10,
+        "time": "2019-11-03T10:56:14.660Z"
+      }
+    },
+    {
+      "model": "api.userconsumption",
+      "pk": 17,
+      "fields": {
+        "user": 26,
+        "areaid": "AREA1",
+        "consumption": 10,
+        "time": "2019-11-03T10:57:22.021Z"
+      }
+    },
+    {
+      "model": "api.complain",
+      "pk": 1,
+      "fields": {
+        "user": 24,
+        "complaintxn": "10547",
+        "complain": "qwertyuighbnbnhnhjm",
+        "time": "2019-10-18T08:38:35.038Z",
+        "complainid": "quantity",
+        "status": true,
+        "username": "USER1"
+      }
+    },
+    {
+      "model": "api.complain",
+      "pk": 2,
+      "fields": {
+        "user": 24,
+        "complaintxn": "10222",
+        "complain": "qwertyuighbnbnhnhjm",
+        "time": "2019-10-18T08:39:10.142Z",
+        "complainid": "quantity",
+        "status": false,
+        "username": "USER1"
+      }
+    },
+    {
+      "model": "api.complain",
+      "pk": 3,
+      "fields": {
+        "user": 24,
+        "complaintxn": "10313",
+        "complain": "qwertyuighbnbnhnhjm",
+        "time": "2019-10-18T08:39:10.142Z",
+        "complainid": "quantity",
+        "status": false,
+        "username": "USER1"
+      }
+    },
+    {
+      "model": "api.complain",
+      "pk": 4,
+      "fields": {
+        "user": 24,
+        "complaintxn": "10133",
+        "complain": "qwertyuighbnbnhnhjm",
+        "time": "2019-10-18T08:39:10.142Z",
+        "complainid": "quantity",
+        "status": false,
+        "username": "USER1"
+      }
+    },
+    {
+      "model": "api.complain",
+      "pk": 5,
+      "fields": {
+        "user": 24,
+        "complaintxn": "COMP2510577",
+        "complain": "qwertyuighbnbnhnhjm",
+        "time": "2019-10-18T08:42:37.249Z",
+        "complainid": "quantity",
+        "status": false,
+        "username": "USER1"
+      }
+    },
+    {
+      "model": "api.tax",
+      "pk": 1,
+      "fields": {
+        "user": 24,
+        "txnid": "TXN2510341",
+        "amount": 100,
+        "time": "2019-11-01T05:03:05.873Z",
+        "username": "ranjan"
+      }
+    },
+    {
+      "model": "api.tax",
+      "pk": 2,
+      "fields": {
+        "user": 26,
+        "txnid": "TXN2510483",
+        "amount": 100,
+        "time": "2019-11-01T18:28:59.675Z",
+        "username": "ranjan25"
+      }
+    },
+    {
+      "model": "api.wallet",
+      "pk": 1,
+      "fields": {
+        "user": 26,
+        "amount": 2831,
+        "consumption": 190
+      }
+    },
+    {
+      "model": "api.wallet",
+      "pk": 2,
+      "fields": {
+        "user": 28,
+        "amount": 100,
+        "consumption": 0
+      }
+    }
+  ]
