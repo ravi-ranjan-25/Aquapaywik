@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.core import serializers
 import random
-from .serializers import userSerializer,complainSerializer,transactionSerializer,qualitySerializer,homepageSerializer,walletSerializer,areaSerializer
+from .serializers import userSerializer,complainSerializer,transactionSerializer,qualitySerializer,homepageSerializer,walletSerializer,areaSerializer,usercSerializer
 from rest_framework.generics import ListAPIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -437,6 +437,11 @@ class walletListView(ListAPIView):
 class areaListView(ListAPIView):
     queryset = areaQuantity.objects.all()
     serializer_class = areaSerializer
+
+class usercListView(ListAPIView):
+    queryset = userConsumption.objects.all()
+    serializer_class = usercSerializer
+
 
 
 def modelapi(request):

@@ -1,13 +1,26 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from api.models import Complain,Tax,quality,userConsumption,wallet,areaQuantity
+from api.models import Complain,Tax,quality,userConsumption,wallet,areaQuantity,
 
 class userSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['pk','username','first_name','last_name','email']
 
+
+
 class complainSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField('Complain')
+    
+    class Meta:
+        model = Complain
+        fields = '__all__'
+
+    def Complain(self,wall): 
+         user1 = wall.user.username
+         return user1
+
+class usercSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField('Complain')
     
     class Meta:

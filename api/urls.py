@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from api import views
 from rest_framework import routers
-from .views import UserListView,complainListView,transactionListView,qualityListView,homepageListView,walletListView,areaListView
+from .views import UserListView,complainListView,transactionListView,qualityListView,homepageListView,walletListView,areaListView,usercListView
 
 # router = routers.DefaultRouter()
 # router.register('users',views.UserListView , base_name="User")
@@ -48,6 +48,7 @@ urlpatterns = [
     path('software/pendingtax',views.pendingTax,name = "estimated1"),
     path('software/pendinguser',views.pendinguser,name = "estimated3"),
     path('software/homepage',homepageListView.as_view(),name = "homese"),
+    path('software/userconsumed',usercListView.as_view(),name = "homese"),
     
     path('software/pending',walletListView.as_view(),name = "homes2e"),
     path('software/areagraph',areaListView.as_view(),name = "homes22e"),
