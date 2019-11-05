@@ -441,7 +441,7 @@ def modelapi(request):
 
 def estimated(request):
     # print(consumed.time)
-    param = request.GET.get('area')
+    param = request.GET.get('areaparam')
     username1 = request.GET.get('username')
     total = 0
     walle = 0
