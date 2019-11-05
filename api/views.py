@@ -492,8 +492,8 @@ def estimated(request):
         if c.time>yesterday and c.time<today:
             yesterdayConsumed = yesterdayConsumed + c.consumption;
         
-    # query = area.objects.all()[0]
-    # query1 = area.objects.all()[1]
+    query = area.objects.all()[0]
+    query1 = area.objects.all()[1]
     
     # myDict = (request.GET).dict()
     # df=pd.DataFrame(myDict, index=[0])
@@ -503,8 +503,8 @@ def estimated(request):
     # for i in answer:
     #     a = i 
     
-	
-    return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus})
+	i=0
+    return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':i})
     
         
         
@@ -606,9 +606,8 @@ def ohevalue(df):
 
 def approvereject(unit):
     try:
-        BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        model_dir= os.path.join(BASE_DIRS,'api/aquapaywik_ohe.pkl')
-        mdl=joblib.load(model_dir)
+        mdl=joblib.load("/home/ravi/Desktop/Ravi/www/bengalathon/aquapaywik/api/aquapaywik_model.pkl")
+        
         X=unit
         X=np.array(unit)
         X=X.reshape(1,-1)
