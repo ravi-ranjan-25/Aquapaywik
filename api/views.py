@@ -206,7 +206,7 @@ def qualityN(request):
     qualityOfWater = request.GET.get('voltage')
     Ntu = request.GET.get('ntu')
     
-    d = quality(quality = qualityOfWater,ntu = Ntu)
+    d = quality(voltage = qualityOfWater,ntu = Ntu)
     d.save()
     return JsonResponse({'result':1})
 
