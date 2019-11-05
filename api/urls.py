@@ -53,6 +53,9 @@ urlpatterns = [
     path('software/areagraph',areaListView.as_view(),name = "homes22e"),
     path('software/viewprofile',views.viewprofile,name = "homes022e"),
     path('software/resolvecomplains',views.resolveComplain,name = "resolve"),
-    path('software/map',views.mapCall,name="map")
+    path('software/map',views.mapCall,name="map"),
+
+    path('model/predict',views.cxcontact,name="test")
+
 
 ]

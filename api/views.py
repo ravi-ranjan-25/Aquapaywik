@@ -9,8 +9,20 @@ from django.core import serializers
 import random
 from .serializers import userSerializer,complainSerializer,transactionSerializer,qualitySerializer,homepageSerializer,walletSerializer,areaSerializer
 from rest_framework.generics import ListAPIView
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.parsers import JSONParser
+from rest_framework.decorators import api_view
 import datetime
 import pytz
+import os
+import pickle
+import joblib
+import json
+import numpy as np 
+from sklearn import preprocessing 
+import pandas as pd
+ 
 # Create your views here.
 
 """
@@ -480,9 +492,18 @@ def estimated(request):
         if c.time>yesterday and c.time<today:
             yesterdayConsumed = yesterdayConsumed + c.consumption;
         
-    query = area.objects.all()[0]
-    query1 = area.objects.all()[1]
-   
+    # query = area.objects.all()[0]
+    # query1 = area.objects.all()[1]
+    
+    # myDict = (request.GET).dict()
+    # df=pd.DataFrame(myDict, index=[0])
+    # answer=approvereject(ohevalue(df)).tolist()
+    # # a = answer[0]
+    
+    # for i in answer:
+    #     a = i 
+    
+	
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus})
     
         
@@ -541,5 +562,86 @@ def mapCall(request):
 
     return JsonResponse({'AREA1':query.areastatus,'AREA2':query1.areastatus})  
 
+def predict(request):
+    BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model_dir= os.path.join(BASE_DIRS,'api/aquapaywik_ohe.pkl')
+    print(model_dir)
 
+
+def ohevalue(df):
+    BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model_dir= os.path.join(BASE_DIRS,'api/aquapaywik_ohe.pkl')
+    ohe_col = joblib.load(model_dir)
+    cat_columns=['day','area']
+    df_processed = pd.get_dummies(df, columns=cat_columns)
+    print(df_processed)
+    newdict={}
     
+    for i in ohe_col:
+        if i in df_processed.columns:
+    	    newdict[i]=df_processed[i].values
+        else:
+    	    newdict[i]=0
+    
+    newdf=pd.DataFrame(newdict)
+    print(newdf)
+    return newdf
+
+# def approvereject(unit):
+# 	try:
+# 		mdl=joblib.load("/home/ravi/Desktop/Ravi/www/bengalathon/aquapaywik/api/aquapaywik_model.pkl")
+# 		# scalers=joblib.load("/Users/sahityasehgal/Documents/Coding/DjangoApiTutorial/DjangoAPI/MyAPI/scalers.pkl")
+# 		X=unit
+#         X=np.array(unit)
+#         X=X.reshape(1,-1)
+# 		# y_pred=mdl.predict(X)
+# 		# y_pred=(y_pred>0.58)
+# 		newdf=pd.DataFrame(y_pred, columns=['quantity'])
+# 		# newdf=newdf.replace({True:'Approved', False:'Rejected'})
+# 		K.clear_session()
+# 		return (newdf.values[0][0],X[0])
+# 	except ValueError as e:
+# 		return (e.args[0])
+
+
+def approvereject(unit):
+    try:
+        mdl=joblib.load("/home/ravi/Desktop/Ravi/www/bengalathon/aquapaywik/api/aquapaywik_model.pkl")
+        X=unit
+        X=np.array(unit)
+        X=X.reshape(1,-1)
+        y_pred=mdl.predict(X)
+        print(y_pred)
+        newdf=pd.DataFrame(y_pred>0.58, columns=['quantity'])
+        print(newdf)
+        # K.clear_session()
+        return y_pred
+    except ValueError as e:
+        return (e.args[0])
+
+
+# def cxcontact(request):
+
+# 				myDict = (request.GET).dict()
+# 				df=pd.DataFrame(myDict, index=[0])
+# 				answer=approvereject(ohevalue(df))
+                
+# 				# Xscalers=approvereject(ohevalue(df))[1]
+# 				# print(Xscalers)
+# 				# messages.success(request,'Application Status: {}'.format(answer))
+                
+# 	            # form=ApprovalForm()
+# 				return json.dumps({'result':answer,})
+# 	            # return render(request, 'myform/cxform.html', {'form':form})
+#                 # return JsonResponse({'pending':total})
+
+def cxcontact(request):
+    myDict = (request.GET).dict()
+    df=pd.DataFrame(myDict, index=[0])
+    answer=approvereject(ohevalue(df)).tolist()
+    # a = answer[0]
+    
+    for i in answer:
+        a = i 
+    return JsonResponse({'result':i})
+		                
