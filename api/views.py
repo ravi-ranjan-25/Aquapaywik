@@ -393,7 +393,7 @@ def paytmCall(request):
         user1 = User.objects.get(username = username1)
         user2 = User.objects.get(username = 'admin')
         
-        print(user1)
+        print(user2)
         complaint = random.randint(100,999) + random.randint(9999,10000) + user1.pk
     
         txn = "TXN25"+str(complaint)

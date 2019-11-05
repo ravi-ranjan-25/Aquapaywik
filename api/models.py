@@ -37,7 +37,7 @@ class areaQuantity(models.Model):
 
 class quality(models.Model):
     voltage = models.FloatField(default= 0.00)        
-    
+    ntu = models.FloatField(default=0.00)
     time = models.DateTimeField(default = timezone.now())
 
   
