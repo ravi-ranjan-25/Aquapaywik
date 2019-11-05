@@ -494,7 +494,7 @@ def estimated(request):
         
     query = area.objects.all()[0]
     query1 = area.objects.all()[1]
-    
+    i=0
     # myDict = (request.GET).dict()
     # df=pd.DataFrame(myDict, index=[0])
     # answer=approvereject(ohevalue(df)).tolist()
@@ -503,7 +503,7 @@ def estimated(request):
     # for i in answer:
     #     a = i 
     
-	i=0
+	
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':i})
     
         
