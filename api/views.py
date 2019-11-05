@@ -494,7 +494,14 @@ def estimated(request):
         
     query = area.objects.all()[0]
     query1 = area.objects.all()[1]
-    i=0
+    myDict = (request.GET).dict()
+    df=pd.DataFrame(myDict, index=[0])
+    answer=approvereject(ohevalue(df)).tolist()
+    # a = answer[0]
+    
+    for i in answer:
+        a = i 
+    
     # myDict = (request.GET).dict()
     # df=pd.DataFrame(myDict, index=[0])
     # answer=approvereject(ohevalue(df)).tolist()
