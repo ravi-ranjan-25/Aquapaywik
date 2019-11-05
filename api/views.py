@@ -514,7 +514,8 @@ def estimated(request):
     #     a = i 
     
 	
-    return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':i})
+    return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,
+        'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200})
     
         
         
@@ -552,7 +553,8 @@ def viewprofile(request):
     house = houseDetails.objects.get(user = user1)
     area1 = house.Area
     return JsonResponse({'result':1,'username':user1.username,'email':user1.email,'firstname':user1.first_name,
-                        'lastname':user1.last_name,'house_no':house.house_no,'street_name':house.street_name,'pincode':house.pincode,'area':area1.areaName,'water_consumed':Wallet.consumption,'pending_tax':Wallet.amount})
+                        'lastname':user1.last_name,'house_no':house.house_no,'street_name':house.street_name,'pincode':house.pincode,'area':area1.areaName,
+                        'water_consumed':Wallet.consumption,'pending_tax':Wallet.amount})
   
 def resolveComplain(request):
     get_id = request.GET.get('id')
@@ -658,4 +660,6 @@ def cxcontact(request):
     for i in answer:
         a = i 
     return JsonResponse({'result':i})
+
+
 		                
