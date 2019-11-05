@@ -606,7 +606,10 @@ def ohevalue(df):
 
 def approvereject(unit):
     try:
-        mdl=joblib.load("/home/ravi/Desktop/Ravi/www/bengalathon/aquapaywik/api/aquapaywik_model.pkl")
+        BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        model_dir= os.path.join(BASE_DIRS,'api/aquapaywik_model.pkl')
+    
+        mdl=joblib.load(model_dir)
         
         X=unit
         X=np.array(unit)
