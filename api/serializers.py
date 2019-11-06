@@ -38,9 +38,17 @@ class transactionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class areaSerializer(serializers.ModelSerializer):
+    areaid = serializers.SerializerMethodField('Complain')
+    
+    
     class Meta:
         model = areaQuantity
         fields = '__all__'
+
+    def Complain(self,wall): 
+         user1 = wall.areaN.areaid
+         return user1
+    
 
 
 class qualitySerializer(serializers.ModelSerializer):
