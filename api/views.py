@@ -454,7 +454,7 @@ def estimated(request):
     total = 0
     walle = 0
     if(username1 == 'none'):
-        am = wallet.objects.all()
+        am = Tax.objects.all()
         user1 = User.objects.filter(username = 'admin')
         
         for a in am:
