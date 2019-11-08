@@ -139,7 +139,7 @@ http://aquapaywik.herokuapp.com/api/software/paytmcall
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-def addconsumption(meter_id,quantiy):
+# def addconsumption(meter_id,quantiy):
     
 
 
