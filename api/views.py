@@ -139,6 +139,9 @@ http://aquapaywik.herokuapp.com/api/software/paytmcall
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
+def addconsumption(meter_id,quantiy):
+    
+
 
 def userConsumptionN(request):
     house = request.GET.get('meter_id')
