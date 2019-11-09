@@ -521,7 +521,7 @@ def estimated(request):
     for i in answer:   
         a = i 
 
-    if(areaparam == "all"):
+    if(param == "all"):
         i=i*2
 
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,
