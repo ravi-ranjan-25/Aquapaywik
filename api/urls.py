@@ -56,7 +56,8 @@ urlpatterns = [
     path('software/resolvecomplains',views.resolveComplain,name = "resolve"),
     path('software/map',views.mapCall,name="map"),
 
-    path('model/predict',views.cxcontact,name="test")
+    path('model/predict',views.cxcontact,name="test"),
+    path('model/house',views.house_cxcontact,name="test1")
 
 
 ]

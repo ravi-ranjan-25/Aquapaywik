@@ -607,6 +607,30 @@ def ohevalue(df):
     print(newdf)
     return newdf
 
+
+def house_ohevalue(df):
+    BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model_dir= os.path.join(BASE_DIRS,'api/aquapaywik_house_ohe.pkl')
+    ohe_col = joblib.load(model_dir)
+    cat_columns=['day','house']
+    df_processed = pd.get_dummies(df, columns=cat_columns)
+    print(df_processed)
+    newdict={}
+    
+    for i in ohe_col:
+        if i in df_processed.columns:
+    	    newdict[i]=df_processed[i].values
+        else:
+    	    newdict[i]=0
+    
+    newdf=pd.DataFrame(newdict)
+    print(newdf)
+    return newdf
+
+
+
+
+
 # def approvereject(unit):
 # 	try:
 # 		mdl=joblib.load("/home/ravi/Desktop/Ravi/www/bengalathon/aquapaywik/api/aquapaywik_model.pkl")
@@ -644,6 +668,28 @@ def approvereject(unit):
         return (e.args[0])
 
 
+def house_approvereject(unit):
+    try:
+        BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        model_dir= os.path.join(BASE_DIRS,'api/aquapaywik_house_model.pkl')
+    
+        mdl=joblib.load(model_dir)
+        
+        X=unit
+        X=np.array(unit)
+        X=X.reshape(1,-1)
+        y_pred=mdl.predict(X)
+        print(y_pred)
+        newdf=pd.DataFrame(y_pred>0.58, columns=['quantity'])
+        print(newdf)
+        # K.clear_session()
+        return y_pred
+    except ValueError as e:
+        return (e.args[0])
+
+
+
+
 # def cxcontact(request):
 
 # 				myDict = (request.GET).dict()
@@ -670,4 +716,13 @@ def cxcontact(request):
     return JsonResponse({'result':i})
 
 
-		                
+
+def house_cxcontact(request):
+    myDict = (request.GET).dict()
+    df=pd.DataFrame(myDict, index=[0])
+    answer=house_approvereject(house_ohevalue(df)).tolist()
+    # a = answer[0]
+    
+    for i in answer:
+        a = i 
+    return JsonResponse({'result':i})
