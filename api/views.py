@@ -22,8 +22,6 @@ import json
 import numpy as np 
 from sklearn import preprocessing 
 import pandas as pd
-from django.shortcuts import render
-
  
 # Create your views here.
 
@@ -458,34 +456,14 @@ def estimated(request):
     username1 = request.GET.get('username')
     total = 0
     walle = 0
-    a=0
-    deploy=0
     if(username1 == 'none'):
         am = Tax.objects.all()
         user1 = User.objects.filter(username = 'admin')
         
-
-        myDict = (request.GET).dict()
-        df=pd.DataFrame(myDict, index=[0])
-        answer=approvereject(ohevalue(df)).tolist()
-        a = answer[0]
-    
-        for i in answer:
-            a = i 
-        
-        deploy = a*2
-
         for a in am:
             if(a.user != user1):
                 total = a.amount + total
 
-        # query = area.objects.all()[0]
-        # query1 = area.objects.all()[1]
-        
-        print(a)
-
-
-      
         if(param == "all"):
             consumed = userConsumption.objects.all()
         else:
@@ -496,17 +474,7 @@ def estimated(request):
             Wallet = wallet.objects.get(user = user1)
             walle = Wallet.amount
             consumed = userConsumption.objects.filter(user__username = username1)
-            
-            myDict = (request.GET).dict()
-            df=pd.DataFrame(myDict, index=[0])
-            answer=approvereject(ohevalue(df)).tolist()
-            a = answer[0]
     
-            for i in answer:
-                a = i 
-          
-            deploy = a
-
 
     day1 = datetime.datetime.now(tz = pytz.UTC)
     today = day1.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -537,32 +505,28 @@ def estimated(request):
         
     query = area.objects.all()[0]
     query1 = area.objects.all()[1]
-    # myDict = (request.GET).dict()
-    # df=pd.DataFrame(myDict, index=[0])
-    # answer=approvereject(ohevalue(df)).tolist()
-    # # a = answer[0]
+    myDict = (request.GET).dict()
+    df=pd.DataFrame(myDict, index=[0])
+    answer=approvereject(ohevalue(df)).tolist()
+    # a = answer[0]
     
-    # for i in answer:
-    #     a = i 
+    for i in answer:
+        a = i 
     
-    # myDict = (request.GET).dict()
-    # df=pd.DataFrame(myDict, index=[0])
-    # answer=approvereject(ohevalue(df)).tolist()
-    # # a = answer[0]
+    myDict = (request.GET).dict()
+    df=pd.DataFrame(myDict, index=[0])
+    answer=approvereject(ohevalue(df)).tolist()
+    a = answer[0]
     
-    # for i in answer:
-    #     a = i 
+    for i in answer:
+        a = i 
     
-    
-    
-    
-    # print(1)
-    # print(geodata1['result'])
-    # print(geodata['result'])
+	if (areaparam=="all"):
+        i = i*2
 
 
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,
-        'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':deploy,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200})
+        'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200})
     
         
         
