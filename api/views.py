@@ -459,6 +459,7 @@ def estimated(request):
     total = 0
     walle = 0
     a=0
+    deploy=0
     if(username1 == 'none'):
         am = Tax.objects.all()
         user1 = User.objects.filter(username = 'admin')
