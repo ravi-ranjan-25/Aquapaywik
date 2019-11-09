@@ -460,6 +460,14 @@ def estimated(request):
         am = Tax.objects.all()
         user1 = User.objects.filter(username = 'admin')
         
+        myDict = (request.GET).dict()
+        df=pd.DataFrame(myDict, index=[0])
+        answer=approvereject(ohevalue(df)).tolist()
+        a = answer[0]
+    
+        for i in answer:   
+            a = i 
+
         for a in am:
             if(a.user != user1):
                 total = a.amount + total
@@ -470,11 +478,21 @@ def estimated(request):
             consumed = userConsumption.objects.filter(areaid=param)
     else:
             user1 = User.objects.get(username=username1)
-          
             Wallet = wallet.objects.get(user = user1)
             walle = Wallet.amount
             consumed = userConsumption.objects.filter(user__username = username1)
+
+            myDict = (request.GET).dict()
+            df=pd.DataFrame(myDict, index=[0])
+            answer=house_approvereject(house_ohevalue(df)).tolist()
+            # a = answer[0]
     
+            for i in answer:
+                a = i 
+
+            i = i+i*0.2    
+
+            
 
     day1 = datetime.datetime.now(tz = pytz.UTC)
     today = day1.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -505,22 +523,7 @@ def estimated(request):
         
     query = area.objects.all()[0]
     query1 = area.objects.all()[1]
-    myDict = (request.GET).dict()
-    df=pd.DataFrame(myDict, index=[0])
-    answer=approvereject(ohevalue(df)).tolist()
-    # a = answer[0]
     
-    for i in answer:
-        a = i 
-    
-    myDict = (request.GET).dict()
-    df=pd.DataFrame(myDict, index=[0])
-    answer=approvereject(ohevalue(df)).tolist()
-    a = answer[0]
-    
-    for i in answer:   
-        a = i 
-
     if(param == "all"):
         i=i*2
 
