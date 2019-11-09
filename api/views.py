@@ -464,14 +464,6 @@ def estimated(request):
         user1 = User.objects.filter(username = 'admin')
         
 
-
-
-        for a in am:
-            if(a.user != user1):
-                total = a.amount + total
-
-        # query = area.objects.all()[0]
-        # query1 = area.objects.all()[1]
         myDict = (request.GET).dict()
         df=pd.DataFrame(myDict, index=[0])
         answer=approvereject(ohevalue(df)).tolist()
@@ -479,9 +471,15 @@ def estimated(request):
     
         for i in answer:
             a = i 
-          
-        a = a*2
+        
 
+        for a in am:
+            if(a.user != user1):
+                total = a.amount + total
+
+        # query = area.objects.all()[0]
+        # query1 = area.objects.all()[1]
+        
         print(a)
       
       
@@ -495,6 +493,7 @@ def estimated(request):
             Wallet = wallet.objects.get(user = user1)
             walle = Wallet.amount
             consumed = userConsumption.objects.filter(user__username = username1)
+            
             myDict = (request.GET).dict()
             df=pd.DataFrame(myDict, index=[0])
             answer=approvereject(ohevalue(df)).tolist()
@@ -503,7 +502,7 @@ def estimated(request):
             for i in answer:
                 a = i 
           
-            
+            deploy = a
 
 
     day1 = datetime.datetime.now(tz = pytz.UTC)
@@ -552,7 +551,10 @@ def estimated(request):
     #     a = i 
     
 	
-    
+    if(username1=="all"):
+          
+        deploy = a*2
+
     
     
     # print(1)
@@ -561,7 +563,7 @@ def estimated(request):
 
 
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,
-        'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':a,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200})
+        'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':deploy,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200})
     
         
         
