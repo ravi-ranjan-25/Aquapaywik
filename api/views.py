@@ -490,8 +490,7 @@ def estimated(request):
             for i in answer:
                 a = i 
 
-            i = i+i*0.2    
-
+            
             
 
     day1 = datetime.datetime.now(tz = pytz.UTC)
@@ -526,6 +525,8 @@ def estimated(request):
     
     if(param == "all"):
         i=i*2
+
+    i=i+i*0.2
 
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,
         'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200})
