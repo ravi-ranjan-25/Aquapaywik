@@ -473,6 +473,7 @@ def estimated(request):
         for i in answer:
             a = i 
         
+        deploy = a*2
 
         for a in am:
             if(a.user != user1):
@@ -482,7 +483,8 @@ def estimated(request):
         # query1 = area.objects.all()[1]
         
         print(a)
-      
+
+
       
         if(param == "all"):
             consumed = userConsumption.objects.all()
@@ -551,11 +553,7 @@ def estimated(request):
     # for i in answer:
     #     a = i 
     
-	
-    if(username1=="all"):
-          
-        deploy = a*2
-
+    
     
     
     # print(1)
