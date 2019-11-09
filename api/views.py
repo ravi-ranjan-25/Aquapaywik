@@ -23,7 +23,7 @@ import numpy as np
 from sklearn import preprocessing 
 import pandas as pd
 from django.shortcuts import render
-import requests
+
  
 # Create your views here.
 
