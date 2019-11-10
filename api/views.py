@@ -22,6 +22,7 @@ import json
 import numpy as np 
 from sklearn import preprocessing 
 import pandas as pd
+import requests
  
 # Create your views here.
 
@@ -528,8 +529,66 @@ def estimated(request):
 
     i=i+i*0.2
 
+    week = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+    day1 = datetime.datetime.today().weekday()
+    
+    link = 'https://aquapaywik.herokuapp.com/api/model/predict?area=s&day='+week[day1]
+    link1 = 'https://aquapaywik.herokuapp.com/api/model/predict?area=n&day='+week[day1]
+
+   
+    response = requests.get(link)
+    response1 = requests.get(link1)
+    
+    mapdata = response.json()
+    mapdata1 = response1.json()
+    param1 = ['AREA1','AREA2']
+    map1 = mapdata['result'] + 0.2*mapdata['result']
+    map2 = mapdata1['result'] + 0.2*mapdata1['result']
+    
+    areapredict=[map1,map2]
+    index = [0,1]
+
+    
+    consumed2 = userConsumption.objects.filter(areaid='AREA1')
+    consumed3 = userConsumption.objects.filter(areaid='AREA2')
+
+    todayConsumed1 = todayConsumed2 = 0
+    
+    for w in consumed2:
+        if(today<w.time):
+            todayConsumed1 = todayConsumed1 + c.consumption;
+    
+    for w in consumed3:
+        if(today<w.time):
+            todayConsumed2 = todayConsumed2 + c.consumption;
+    
+
+    tconsumed = [todayConsumed1,todayConsumed2]
+    st=0
+    areast = ['0','1']
+
+
+
+    for z in index:
+        consumed1 = userConsumption.objects.filter(areaid=param[z])
+        predicts = areapredict[z]
+
+        if(tconsumed[z]<= 0.8*predicts):
+            st = 0
+        elif tconsumed > 0.8*predicts and tconsumed <= predicts:
+            st = 1
+        else:
+            st = 2    
+        
+        areast[z] = st
+
+
+     
+
+
+
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,
-        'userPending':walle,'area1':query.areastatus,'area2':query1.areastatus,'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200})
+        'userPending':walle,'area1':areast[0],'area2':areast[1],'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200})
     
         
         
@@ -582,11 +641,29 @@ def resolveComplain(request):
 def mapCall(request):
     area1 = 'AREA1'
     area2 = 'AREA2'
-    query = area.objects.all()[0]
-    query1 = area.objects.all()[1]
+    week = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+    day1 = datetime.datetime.today().weekday()
     
+    link = 'http://localhost:8000/api/model/predict?area=s&day='+week[day1]
+    link1 = 'http://localhost:8000/api/model/predict?area=n&day='+week[day1]
 
-    return JsonResponse({'AREA1':query.areastatus,'AREA2':query1.areastatus})  
+   
+    response = requests.get(link)
+    response1 = requests.get(link1)
+    
+    mapdata = response.json()
+    mapdata1 = response1.json()
+
+    # mapdata1 = response1.join()
+    area1 = mapdata['result'] + 0.2*mapdata['result']
+    area2 = mapdata1['result']+ 0.2*mapdata1['result']
+
+    print(area1)
+    # query = area.objects.all()[0]
+    # query1 = area.objects.all()[1]
+    
+    
+    # return JsonResponse({'AREA1':query.areastatus,'AREA2':query1.areastatus})  
 
 def predict(request):
     BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
