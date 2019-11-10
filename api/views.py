@@ -575,7 +575,7 @@ def estimated(request):
 
         if(tconsumed[z]<= 0.8*predicts):
             st = 0
-        elif tconsumed > 0.8*predicts and tconsumed <= predicts:
+        elif tconsumed[z] > 0.8*predicts and tconsumed[z] <= predicts:
             st = 1
         else:
             st = 2    
