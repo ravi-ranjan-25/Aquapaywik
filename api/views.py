@@ -556,11 +556,11 @@ def estimated(request):
     
     for w in consumed2:
         if(today<w.time):
-            todayConsumed1 = todayConsumed1 + c.consumption;
+            todayConsumed1 = todayConsumed1 + w.consumption;
     
     for w in consumed3:
         if(today<w.time):
-            todayConsumed2 = todayConsumed2 + c.consumption;
+            todayConsumed2 = todayConsumed2 + w.consumption;
     
 
     tconsumed = [todayConsumed1,todayConsumed2]
