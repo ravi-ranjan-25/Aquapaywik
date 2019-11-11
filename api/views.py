@@ -148,49 +148,52 @@ def userConsumptionN(request):
     house = request.GET.get('meter_id')
     
     amount = request.GET.get('quantity')
-    
-    d = houseDetails.objects.get(house_no=house)
-    ar = d.Area
-    
-    Areaid = ar.areaid
-    User1 = d.user
-    e = wallet.objects.get(user=User1)   
-    c = userConsumption(user = d.user,consumption = amount,areaid=Areaid)
-    a = area.objects.get(pk = ar.id)
-
-
-    e.consumption = e.consumption + float(amount)
-    consumed = e.consumption
-
-    price = 0
-    if(consumed <= 80):
-        price = consumed * 1.5
-    elif consumed >= 80 and consumed <= 150:
-        price = (80*1.5)+(consumed - 80)*2.5
-    else:        
-        # price = (2*0.10)+(3*0.12)+(consumed-5)*1.5
-        price = (80*1.5) + (70*2.5) + (consumed - 150)*5
-
-    
-    Status = 0
-
-    # if(consumed <= 20):
-    #     Status = 0
-    # elif(consumed >=30 and consumed <= 40):
-    #     Status = 1
-    # else:
-    #     Status = 2
+    result=0
+    amm=0
+    if(float(amount) != 0.00):
+        d = houseDetails.objects.get(house_no=house)
+        ar = d.Area
         
+        Areaid = ar.areaid
+        User1 = d.user
+        e = wallet.objects.get(user=User1)   
+        c = userConsumption(user = d.user,consumption = amount,areaid=Areaid)
+        a = area.objects.get(pk = ar.id)
+
+
+        e.consumption = e.consumption + float(amount)
+        consumed = e.consumption
+
+        price = 0
+        if(consumed <= 80):
+            price = consumed * 1.5
+        elif consumed >= 80 and consumed <= 150:
+            price = (80*1.5)+(consumed - 80)*2.5
+        else:        
+            # price = (2*0.10)+(3*0.12)+(consumed-5)*1.5
+            price = (80*1.5) + (70*2.5) + (consumed - 150)*5
+
+        
+        Status = 0
+
+        # if(consumed <= 20):
+        #     Status = 0
+        # elif(consumed >=30 and consumed <= 40):
+        #     Status = 1
+        # else:
+        #     Status = 2
+            
+        
+        e.amount = price
+        a.consumed = a.consumed + float(amount)
+        a.areastatus = Status
+        a.save()
+        e.save()
+        c.save()
+        amm=e.amount
+        result=1
     
-    e.amount = price
-    a.consumed = a.consumed + float(amount)
-    a.areastatus = Status
-    a.save()
-    e.save()
-    c.save()
-
-
-    return JsonResponse({'result':1,'amount':e.amount})
+    return JsonResponse({'result':result,'amount':amm})
     
 
 def areaRequest(request):
