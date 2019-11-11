@@ -172,7 +172,7 @@ def userConsumptionN(request):
         price = (80*1.5) + (70*2.5) + (consumed - 150)*5
 
     
-    # Status = 0
+    Status = 0
 
     # if(consumed <= 20):
     #     Status = 0
