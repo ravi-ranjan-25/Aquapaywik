@@ -200,14 +200,16 @@ def areaRequest(request):
     area_id = request.GET.get('areaid')
     quantityWater = request.GET.get('quantity')
     
-    d = area.objects.get(areaid=area_id)
-    c = areaQuantity(areaN = d,quantity = quantityWater)
-    
-    c.save()
-    
+    result=0
+    if quantityWater==0.00:
+        d = area.objects.get(areaid=area_id)
+        c = areaQuantity(areaN = d,quantity = quantityWater)
+        result=1
+        c.save()
+        
 
 
-    return JsonResponse({'result':1})
+    return JsonResponse({'result':result})
 
 
 def qualityN(request):
