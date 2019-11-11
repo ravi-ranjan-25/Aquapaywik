@@ -594,7 +594,7 @@ def estimated(request):
     index = [0,1,2,3]
 
     housest = [0,0,0,0]
-
+    uconsume = [0.0,0.0,0.0,0.0]
     for z in index:
         linkh = 'https://aquapaywik.herokuapp.com/api/model/house?house=house'+ str(h[z]) +'&day=' + week[day1]
         responseh = requests.get(linkh)
@@ -622,13 +622,14 @@ def estimated(request):
             st = 2    
 
         housest[z] = st
-
+        uconsume[z]=t
 
 
 
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,
                         'userPending':walle,'area1':areast[0],'area2':areast[1],
-                        'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200,'house1':housest[0],'house2':housest[1],'house3':housest[2],'house4':housest[3]})
+                        'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200,'house1':housest[0],'house2':housest[1],'house3':housest[2],'house4':housest[3],
+                        'house1-randi':uconsume[0],'house2-randi':uconsume[1],'house2-randi':uconsume[2],'house3-randi':uconsume[3]})
     
         
         
