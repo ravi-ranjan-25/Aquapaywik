@@ -173,12 +173,12 @@ def userConsumptionN(request):
     
     Status = 0
 
-    if(consumed <= 20):
-        Status = 0
-    elif(consumed >=30 and consumed <= 40):
-        Status = 1
-    else:
-        Status = 2
+    # if(consumed <= 20):
+    #     Status = 0
+    # elif(consumed >=30 and consumed <= 40):
+    #     Status = 1
+    # else:
+    #     Status = 2
         
     
     e.amount = price
@@ -570,6 +570,7 @@ def estimated(request):
 
 
     for z in index:
+       
         consumed1 = userConsumption.objects.filter(areaid=param[z])
         predicts = areapredict[z]
 
@@ -582,13 +583,50 @@ def estimated(request):
         
         areast[z] = st
 
-
+    
      
+    ############################################USER MARKER######################################################
+
+
+    h = [1,2,3,4]
+    
+    index = [0,1,2,3]
+
+    housest = [0,0,0,0]
+
+    for z in index:
+        linkh = 'https://aquapaywik.herokuapp.com/api/model/house?house=house'+ h[z] +'&day=' + week[day1]
+        responseh = requests.get(linkh)
+        
+        predicth = responseh['result']
+
+        houseD = houseDetails.objects.get(house_no=h[z])
+        userpk = houseD.user
+
+        getuser = userConsumption.objects.filter(pk=userpk)
+
+        t = 0
+        st = 0
+        for u in getuser:
+            # t = getuser.consumption + t
+            if(today<u.time):
+                t = t + u.consumption;
+
+        if(t <= 0.8*predicth):
+            st = 0
+        elif t > 0.8*predicth and t <= predicth:
+            st = 1
+        else:
+            st = 2    
+
+        housest[z] = st
+
 
 
 
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,
-        'userPending':walle,'area1':areast[0],'area2':areast[1],'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200})
+                        'userPending':walle,'area1':areast[0],'area2':areast[1],
+                        'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200,'house1':housest[0],'house2':housest[1],'house3':housest[2],'house4':housest[4]})
     
         
         
