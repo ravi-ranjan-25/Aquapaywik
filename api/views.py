@@ -163,15 +163,15 @@ def userConsumptionN(request):
     consumed = e.consumption
 
     price = 0
-    if(consumed <= 2):
-        price = consumed * 10
-    elif consumed >= 2 and consumed <= 5:
-        price = (2*10)+(consumed - 2*12)
+    if(consumed <= 80):
+        price = consumed * 0.10
+    elif consumed >= 80 and consumed <= 150:
+        price = (2*0.10)+(consumed - 2*0.12)
     else:        
-        price = (2*10)+(3*12)+(consumed-5)*15
+        price = (2*0.10)+(3*0.12)+(consumed-5)*1.5
 
     
-    Status = 0
+    # Status = 0
 
     # if(consumed <= 20):
     #     Status = 0
