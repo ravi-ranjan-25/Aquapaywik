@@ -604,7 +604,7 @@ def estimated(request):
         houseD = houseDetails.objects.get(house_no=h[z])
         userpk = houseD.user
 
-        getuser = userConsumption.objects.filter(pk=userpk)
+        getuser = userConsumption.objects.filter(user=userpk)
 
         t = 0
         st = 0
