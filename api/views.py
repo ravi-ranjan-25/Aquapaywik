@@ -622,7 +622,7 @@ def estimated(request):
             st = 2    
 
         housest[z] = st
-        uconsume[z]=t
+        uconsume[z]=float(t)
 
 
 
