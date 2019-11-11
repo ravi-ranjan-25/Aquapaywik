@@ -595,7 +595,7 @@ def estimated(request):
     housest = [0,0,0,0]
 
     for z in index:
-        linkh = 'https://aquapaywik.herokuapp.com/api/model/house?house=house'+ h[z] +'&day=' + week[day1]
+        linkh = 'https://aquapaywik.herokuapp.com/api/model/house?house=house'+ str(h[z]) +'&day=' + week[day1]
         responseh = requests.get(linkh)
         
         predicth = responseh['result']
