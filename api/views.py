@@ -201,7 +201,7 @@ def areaRequest(request):
     quantityWater = request.GET.get('quantity')
     
     result=0
-    if quantityWater==0.00:
+    if float(quantityWater)==0.00:
         d = area.objects.get(areaid=area_id)
         c = areaQuantity(areaN = d,quantity = quantityWater)
         result=1
