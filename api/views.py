@@ -508,7 +508,7 @@ def estimated(request):
 
     month = day1.replace(day=1,hour=0, minute=0, second=0, microsecond=0)
     seven = (day1 - tdelta)
-    yesterday = (day1 - tdelta1)
+    yesterday = (today - tdelta1)
 
     
     todayConsumed = monthConsumed = sevenConsumed = yesterdayConsumed = 0
