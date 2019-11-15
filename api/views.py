@@ -621,7 +621,7 @@ def estimated(request):
 
         if(t <= 0.8*predicth):
             st = 0
-        elif t > 0.8*predth and t <= predicth:
+        elif t > 0.8*predicth and t <= predicth:
             st = 1
         else:
             st = 2    
