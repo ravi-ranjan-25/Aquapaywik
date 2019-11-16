@@ -197,9 +197,9 @@ def userConsumptionN(request):
         
         message = Mail(
             from_email='notifications@aquapaywik.000herokuapp.com',
-            to_emails='ravi251999@gmail.com',
+            to_emails=us4.email,
             subject='Excessive Usage',
-            html_content='<center><strong>ATTENTION!!</strong></center><br><br>Dear'+us4.first_name+'80% OF DAILY WATER IS CONSUMED. PLEASE BUY A WATER BOOSTER FOR JUST RS.69/-')
+            html_content='<center><strong>ATTENTION!!</strong></center><br><br>Dear'+us4.first_name+', Excessive water consumption monitored!!')
         
         sg = SendGridAPIClient('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')
         response = sg.send(message)
