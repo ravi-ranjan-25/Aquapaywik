@@ -211,7 +211,7 @@ def userConsumptionN(request):
     
         predicth = pred['result']
 
-        if(counsumed>=predicth):
+        if(todayConsumed>=predicth):
         
             message = Mail(
                 from_email='notifications@aquapaywik.000herokuapp.com',
