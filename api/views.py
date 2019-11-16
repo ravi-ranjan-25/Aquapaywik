@@ -23,7 +23,9 @@ import numpy as np
 from sklearn import preprocessing 
 import pandas as pd
 import requests
- 
+from django.core.mail import send_mail
+
+
 # Create your views here.
 
 """
@@ -187,8 +189,8 @@ def userConsumptionN(request):
 
         ####################EMAIL#######################
 
-        
 
+        send_mail('cvbnm','Hello,','notification@aquapaywik.herokuapp.com',['ravi251999@gmail.com'],fail_silently=False)
 
 
 
