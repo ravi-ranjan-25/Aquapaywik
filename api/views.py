@@ -705,7 +705,7 @@ def estimated(request):
     if((uconsume[2]+uconsume[3]) < areaConsumed[2]):
         area2node = 1
 
-    if((areaConsmed[1]+areaConsumed[2]) < areaConsumed[0]):
+    if((areaConsumed[1]+areaConsumed[2]) < areaConsumed[0]):
         area0node = 1
 
 
