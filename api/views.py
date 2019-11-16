@@ -675,11 +675,39 @@ def estimated(request):
         uconsume[z]=float(t)
 
 
+    ###############################################################################
+    area1node = area2node = area0node = 0 
+    areaArray = ['AREA0','AREA1','AREA2']    
+    indi = [0,1,2]
+    areaConsumed = [0,0,0]
+    for ind in indi:
+
+        areaa = areaQuantity.objects.filter(areaN__areaid = areaArray[ind])
+        
+        for ar in areaa:
+            areaConsumed1 = 0
+            if(today<ar.time):
+                areaConsumed1 = areaConsumed1 + ar.quantity
+
+        areaConsumed[z] = areaConsumed1
+
+    if((uconsume[0]+uconsume[1]) < areaConsumed[1]):
+        area1node = 1
+
+    if((uconsume[2]+uconsume[3]) < areaConsumed[2]):
+        area2node = 1
+
+    if((areaConsumed[0]+areaConsumed[1]) < areaConsumed[1]):
+        area0node = 1
+
+
+
 
     return JsonResponse({'today':todayConsumed,'month':monthConsumed,'seven':sevenConsumed,'yesterday': yesterdayConsumed,'pending':total,
                         'userPending':walle,'area1':areast[0],'area2':areast[1],
                         'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200,'house1':housest[0],'house2':housest[1],'house3':housest[2],'house4':housest[3],
-                        'house1qty':uconsume[0],'house2qty':uconsume[1],'house3qty':uconsume[2],'house4qty':uconsume[3]})
+                        'house1qty':uconsume[0],'house2qty':uconsume[1],'house3qty':uconsume[2],'house4qty':uconsume[3],
+                        'area0node':area0node,'area1node':area1node,'area2node':area2node})
     
         
         
