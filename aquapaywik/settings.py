@@ -144,8 +144,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'notification@aquapaywik.herokuapp.com'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_USER = 'raviranjanv25'
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
