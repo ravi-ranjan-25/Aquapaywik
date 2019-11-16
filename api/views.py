@@ -24,6 +24,8 @@ from sklearn import preprocessing
 import pandas as pd
 import requests
 from django.core.mail import send_mail
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 
 # Create your views here.
@@ -190,8 +192,21 @@ def userConsumptionN(request):
         ####################EMAIL#######################
 
 
-        send_mail('cvbnm','Hello,','notification@aquapaywik.herokuapp.com',['ravi251999@gmail.com'],fail_silently=False)
-
+        # send_mail('cvbnm','Hello,','notification@aquapaywik.herokuapp.com',['ravi251999@gmail.com'],fail_silently=False)
+        
+        message = Mail(
+            from_email='from_email@example.com',
+            to_emails='to@example.com',
+            subject='Sending with Twilio SendGrid is Fun',
+            html_content='<strong>and easy to do anywhere, even with Python</strong>')
+        try:
+            sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+        except Exception as e:
+            print(e.message)
 
 
 
