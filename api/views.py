@@ -677,9 +677,15 @@ def estimated(request):
 
     ###############################################################################
     area1node = area2node = area0node = 0 
-    areaArray = ['AREA0','AREA2','AREA1']    
+    areaArray = ['AREA0','AREA1','AREA2']    
     indi = [0,1,2]
     areaConsumed = [0,0,0]
+    # areaa1 = areaQuantity.objects.filter(areaN = '')
+
+    areaaa2 = area.objects.get(areaid = areaArray[2])
+    areaa1 = areaQuantity.objects.filter(areaN = areaaa2)
+    
+        
     for ind in indi:
 
         areaID = areaArray[ind]
