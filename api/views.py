@@ -691,9 +691,9 @@ def estimated(request):
         areaID = areaArray[ind]
         areaaa = area.objects.get(areaid = areaID)
         areaa = areaQuantity.objects.filter(areaN = areaaa)
-        
+        areaConsumed1 = 0
+            
         for ar in areaa:
-            areaConsumed1 = 0
             if(today<ar.time):
                 areaConsumed1 = areaConsumed1 + ar.quantity
         print(areaConsumed1)
