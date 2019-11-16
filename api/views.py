@@ -193,14 +193,14 @@ def userConsumptionN(request):
 
 
         # send_mail('cvbnm','Hello,','notification@aquapaywik.herokuapp.com',['ravi251999@gmail.com'],fail_silently=False)
-        vv = SENDGRID_API_KEY
+        
         message = Mail(
             from_email='from_email@example.com',
             to_emails='to@example.com',
             subject='Sending with Twilio SendGrid is Fun',
             html_content='<strong>and easy to do anywhere, even with Python</strong>')
         
-        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        sg = SendGridAPIClient('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')
         response = sg.send(message)
         print(response.status_code)
         print(response.body)
