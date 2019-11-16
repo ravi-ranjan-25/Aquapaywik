@@ -737,7 +737,7 @@ def estimated(request):
                         'userPending':walle,'area1':areast[0],'area2':areast[1],
                         'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200,'house1':housest[0],'house2':housest[1],'house3':housest[2],'house4':housest[3],
                         'house1qty':uconsume[0],'house2qty':uconsume[1],'house3qty':uconsume[2],'house4qty':uconsume[3],
-                        'area0node':area0node,'area1node':area1node,'area2node':area2node,'area1today':areapredict[0],'area2today':areapredict[1]})
+                        'area0node':area0node,'area1node':area1node,'area2node':area2node,'area1today':areapredict[0],'area2today':areapredict[1],'userconsumee':uconsume,'areac':areaConsumed})
     
         
         
