@@ -672,7 +672,7 @@ def estimated(request):
         responseh = requests.get(linkh)
         pred = responseh.json()
         
-        predicth = pred['result']
+        predicth = pred['result'] + 0.2*pred['result']
 
         houseD = houseDetails.objects.get(house_no=h[z])
         userpk = houseD.user
