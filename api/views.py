@@ -677,7 +677,7 @@ def estimated(request):
 
     ###############################################################################
     area1node = area2node = area0node = 0 
-    areaArray = ['AREA0','AREA1','AREA2']    
+    areaArray = ['AREA0','AREA2','AREA1']    
     indi = [0,1,2]
     areaConsumed = [0,0,0]
     for ind in indi:
