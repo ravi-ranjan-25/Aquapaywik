@@ -683,7 +683,7 @@ def estimated(request):
     for ind in indi:
 
         areaID = areaArray[ind]
-        areaaa = area.objects.filter(areaid = areaID)
+        areaaa = area.objects.get(areaid = areaID)
         areaa = areaQuantity.objects.filter(areaN = areaaa)
         
         for ar in areaa:
