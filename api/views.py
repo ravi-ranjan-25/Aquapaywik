@@ -686,43 +686,18 @@ def estimated(request):
     # areaa1 = areaQuantity.objects.filter(areaN = areaaa2)
     
         
-    
+    for ind in indi:
 
-    areaID = areaArray[0]
-    areaaa = area.objects.get(areaid = areaID)
-    areaa = areaQuantity.objects.filter(areaN = areaaa)
-    
-    for ar in areaa:
-        areaConsumed1 = 0
-        if(today<ar.time):
-            areaConsumed1 = areaConsumed1 + ar.quantity
-    print(areaConsumed1)
-    areaConsumed[0] = areaConsumed1
-
-
-    areaID = areaArray[1]
-    areaaa = area.objects.get(areaid = areaID)
-    areaa = areaQuantity.objects.filter(areaN = areaaa)
-    
-    for ar in areaa:
-        areaConsumed1 = 0
-        if(today<ar.time):
-            areaConsumed1 = areaConsumed1 + ar.quantity
-    print(areaConsumed1)
-    areaConsumed[1] = areaConsumed1
-
-
-    areaID = areaArray[0]
-    areaaa = area.objects.get(areaid = areaID)
-    areaa = areaQuantity.objects.filter(areaN = areaaa)
-    
-    for ar in areaa:
-        areaConsumed1 = 0
-        if(today<ar.time):
-            areaConsumed1 = areaConsumed1 + ar.quantity
-    print(areaConsumed1)
-    areaConsumed[2] = areaConsumed1
-
+        areaID = areaArray[ind]
+        areaaa = area.objects.get(areaid = areaID)
+        areaa = areaQuantity.objects.filter(areaN = areaaa)
+        
+        for ar in areaa:
+            areaConsumed1 = 0
+            if(today<ar.time):
+                areaConsumed1 = areaConsumed1 + ar.quantity
+        print(areaConsumed1)
+        areaConsumed[ind] = areaConsumed1
 
     if((uconsume[0]+uconsume[1]) < areaConsumed[1]):
         area1node = 1
