@@ -160,6 +160,7 @@ def userConsumptionN(request):
         
         Areaid = ar.areaid
         User1 = d.user
+        us4 = User.objects.get(username=User1)
         e = wallet.objects.get(user=User1)   
         c = userConsumption(user = d.user,consumption = amount,areaid=Areaid)
         a = area.objects.get(pk = ar.id)
@@ -196,7 +197,7 @@ def userConsumptionN(request):
         
         message = Mail(
             from_email='from_email@example.com',
-            to_emails='to@example.com',
+            to_emails='ravi251999@gmail.com',
             subject='Sending with Twilio SendGrid is Fun',
             html_content='<strong>and easy to do anywhere, even with Python</strong>')
         
