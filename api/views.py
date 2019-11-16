@@ -178,6 +178,8 @@ def userConsumptionN(request):
             # price = (2*0.10)+(3*0.12)+(consumed-5)*1.5
             price = (80*1.5) + (70*2.5) + (consumed - 150)*5
 
+        Status = 0
+
         e.amount = price
         a.consumed = a.consumed + float(amount)
         a.areastatus = Status
@@ -186,7 +188,7 @@ def userConsumptionN(request):
         c.save()
         amm=e.amount
         
-        Status = 0
+        
 
         # if(consumed <= 20):
         #     Status = 0
