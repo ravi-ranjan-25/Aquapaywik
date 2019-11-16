@@ -184,6 +184,16 @@ def userConsumptionN(request):
         #     Status = 2
             
         
+
+        ####################EMAIL#######################
+
+        
+
+
+
+
+
+
         e.amount = price
         a.consumed = a.consumed + float(amount)
         a.areastatus = Status
