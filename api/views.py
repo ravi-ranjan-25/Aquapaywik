@@ -585,18 +585,40 @@ def estimated(request):
     
     link = 'https://aquapaywik.herokuapp.com/api/model/predict?area=s&day='+week[day1]
     link1 = 'https://aquapaywik.herokuapp.com/api/model/predict?area=n&day='+week[day1]
-
+    key1 = 0
    
+    if day1 == 6:
+        key1 = 0
+    else:
+        key1 = day1 + 1
+
+    linkh = 'https://aquapaywik.herokuapp.com/api/model/predict?area=s&day='+week[key1]
+    linkh1 = 'https://aquapaywik.herokuapp.com/api/model/predict?area=n&day='+week[key1]
+
+
     response = requests.get(link)
     response1 = requests.get(link1)
     
+    responseh = requests.get(linkh)
+    responseh1 = requests.get(linkh1)
+    
+
+
     mapdata = response.json()
     mapdata1 = response1.json()
+    
+    mapdatah = response.json()
+    mapdatah1 = response1.json()
+    
     param1 = ['AREA1','AREA2']
     map1 = mapdata['result'] + 0.2*mapdata['result']
     map2 = mapdata1['result'] + 0.2*mapdata1['result']
     
-    areapredict=[map1,map2]
+    maph1 = mapdatah['result'] + 0.2*mapdatah['result']
+    maph2 = mapdatah1['result'] + 0.2*mapdatah1['result']
+    
+
+    areapredict=[map1,map2,maph1,maph2]
     index = [0,1]
 
     
@@ -715,7 +737,7 @@ def estimated(request):
                         'userPending':walle,'area1':areast[0],'area2':areast[1],
                         'tommorrow':i,'month1':50,'month2':60,'month3':80,'month4':90,'month5':120,'month6':200,'house1':housest[0],'house2':housest[1],'house3':housest[2],'house4':housest[3],
                         'house1qty':uconsume[0],'house2qty':uconsume[1],'house3qty':uconsume[2],'house4qty':uconsume[3],
-                        'area0node':area0node,'area1node':area1node,'area2node':area2node})
+                        'area0node':area0node,'area1node':area1node,'area2node':area2node,'area1today':areapredict[0],'area2today':areapredict[1]})
     
         
         
