@@ -194,19 +194,37 @@ def userConsumptionN(request):
 
 
         # send_mail('cvbnm','Hello,','notification@aquapaywik.herokuapp.com',['ravi251999@gmail.com'],fail_silently=False)
-        
-        message = Mail(
-            from_email='notifications@aquapaywik.000herokuapp.com',
-            to_emails=us4.email,
-            subject='Excessive Usage',
-            html_content='<center><strong>ATTENTION!!</strong></center><br><br>Dear'+us4.first_name+', Excessive water consumption monitored!!')
-        
-        sg = SendGridAPIClient('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')
-        response = sg.send(message)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        week = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+        day1 = datetime.datetime.today().weekday()
     
+        consumezd = userConsumption.objects.filter(user__username = us4.username)
+
+        linkh = 'https://aquapaywik.herokuapp.com/api/model/house?house=house'+ house +'&day=' + week[day1]
+        responseh = requests.get(linkh)
+        pred = responseh.json()
+        day1 = datetime.datetime.now(tz = pytz.UTC)
+        today = day1.replace(hour=0, minute=0, second=0, microsecond=0)
+        todayConsumed = 0
+        for c in consumezd:
+            if(today<c.time):
+                todayConsumed = todayConsumed + c.consumption;
+    
+        predicth = pred['result']
+
+        if(counsumed>=predicth):
+        
+            message = Mail(
+                from_email='notifications@aquapaywik.000herokuapp.com',
+                to_emails=us4.email,
+                subject='Excessive Usage',
+                html_content='<center><strong>ATTENTION!!</strong></center><br><br>Dear'+us4.first_name+', Excessive water consumption monitored!!')
+            
+            sg = SendGridAPIClient('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')
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+        
 
 
         e.amount = price
