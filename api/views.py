@@ -682,7 +682,8 @@ def estimated(request):
     areaConsumed = [0,0,0]
     for ind in indi:
 
-        areaa = areaQuantity.objects.filter(areaN__areaid = areaArray[ind])
+        areaaa = area.objects.filter(areaid = areaArray[ind])
+        areaa = areaQuantity.objects.filter(areaN = areaaa)
         
         for ar in areaa:
             areaConsumed1 = 0
@@ -694,7 +695,7 @@ def estimated(request):
     if((uconsume[0]+uconsume[1]) < areaConsumed[1]):
         area1node = 1
 
-    if((uconsume[2]+uconsume[3]) < areaConsumed[2]):
+    if((uconsum[2]+uconsume[3]) < areaConsumed[2]):
         area2node = 1
 
     if((areaConsumed[1]+areaConsumed[2]) < areaConsumed[0]):
