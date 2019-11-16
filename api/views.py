@@ -689,7 +689,7 @@ def estimated(request):
             if(today<ar.time):
                 areaConsumed1 = areaConsumed1 + ar.quantity
 
-        areaConsumed[z] = areaConsumed1
+        areaConsumed[ind] = areaConsumed1
 
     if((uconsume[0]+uconsume[1]) < areaConsumed[1]):
         area1node = 1
@@ -697,7 +697,7 @@ def estimated(request):
     if((uconsume[2]+uconsume[3]) < areaConsumed[2]):
         area2node = 1
 
-    if((areaConsumed[0]+areaConsumed[1]) < areaConsumed[1]):
+    if((areaConsumed[1]+areaConsumed[2]) < areaConsumed[0]):
         area0node = 1
 
 
