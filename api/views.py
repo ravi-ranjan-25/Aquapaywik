@@ -193,7 +193,7 @@ def userConsumptionN(request):
 
 
         # send_mail('cvbnm','Hello,','notification@aquapaywik.herokuapp.com',['ravi251999@gmail.com'],fail_silently=False)
-        
+        vv = SENDGRID_API_KEY
         message = Mail(
             from_email='from_email@example.com',
             to_emails='to@example.com',
@@ -206,7 +206,6 @@ def userConsumptionN(request):
         print(response.body)
         print(response.headers)
     
-
 
 
         e.amount = price
