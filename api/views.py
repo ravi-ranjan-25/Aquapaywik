@@ -178,6 +178,13 @@ def userConsumptionN(request):
             # price = (2*0.10)+(3*0.12)+(consumed-5)*1.5
             price = (80*1.5) + (70*2.5) + (consumed - 150)*5
 
+        e.amount = price
+        a.consumed = a.consumed + float(amount)
+        a.areastatus = Status
+        a.save()
+        e.save()
+        c.save()
+        amm=e.amount
         
         Status = 0
 
@@ -205,9 +212,9 @@ def userConsumptionN(request):
         day1 = datetime.datetime.now(tz = pytz.UTC)
         today = day1.replace(hour=0, minute=0, second=0, microsecond=0)
         todayConsumed = 0
-        for c in consumezd:
+        for z in consumezd:
             if(today<c.time):
-                todayConsumed = todayConsumed + c.consumption;
+                todayConsumed = todayConsumed + z.consumption;
     
         predicth = pred['result']
 
@@ -227,13 +234,6 @@ def userConsumptionN(request):
         
 
 
-        e.amount = price
-        a.consumed = a.consumed + float(amount)
-        a.areastatus = Status
-        a.save()
-        e.save()
-        c.save()
-        amm=e.amount
         result=1
     
     return JsonResponse({'result':result,'amount':amm})
